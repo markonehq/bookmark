@@ -16,3 +16,4 @@ This is a base template for a Flutter project. It includes a basic project struc
 - [x] Change app font (Basic fonts structure)
 - [x] Change app color (Basic colors structure)
 - [x] Commonly used widgets (Like dialogs and bottom sheets)
+- [X] Can delete platform specific code (iOS/Android/MacOS/Web/Windows) if not needed
