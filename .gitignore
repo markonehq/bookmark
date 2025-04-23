@@ -57,3 +57,4 @@ app.*.map.json
 *.log.*
 stacked.json
 stacked.json.*
+.vscode/
