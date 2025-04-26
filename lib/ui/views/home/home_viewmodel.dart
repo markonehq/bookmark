@@ -124,9 +124,19 @@ class HomeViewModel extends BaseViewModel {
     log.i("HomeViewModel initialized");
   }
 
-  Future showCustomBottomSheet() async {
+  Future showSettingBottomSheet() async {
     await bottomSheetService.showCustomSheet(
       variant: BottomSheetType.settings,
+      ignoreSafeArea: true,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
+  }
+
+  Future<void> showSearchBottomSheet() async {
+    await bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.search,
       ignoreSafeArea: true,
       enableDrag: true,
       barrierDismissible: true,

@@ -1,3 +1,4 @@
+import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -26,6 +27,7 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
   ],
   bottomsheets: [
     StackedBottomsheet(classType: SettingsSheet),
+    StackedBottomsheet(classType: SearchSheet),
     // @stacked-bottom-sheet
   ],
   dialogs: [

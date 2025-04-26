@@ -26,7 +26,7 @@ class HomeView extends StatelessWidget {
             padding: EdgeInsets.only(left: 16.w),
             child: GestureDetector(
               onTap: () {
-                viewModel.showCustomBottomSheet();
+                viewModel.showSettingBottomSheet();
               },
               child: const CircleAvatar(
                 backgroundImage: NetworkImage(
@@ -49,6 +49,9 @@ class HomeView extends StatelessWidget {
                 ? TextField(
                     controller: viewModel._searchController,
                     autofocus: true,
+                    onSubmitted: (String value) {
+                      viewModel.showSearchBottomSheet();
+                    },
                     cursorColor: Colors.orangeAccent[200],
                     onChanged: viewModel.updateSearchQuery,
                     decoration: InputDecoration(
