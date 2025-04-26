@@ -109,7 +109,6 @@ class HomeViewModel extends BaseViewModel {
   String get searchQuery => _searchQuery;
 
   void updateSearchQuery(String query) {
-    log.i("Search query updated: $query");
     _searchQuery = query;
     notifyListeners();
   }
@@ -117,7 +116,6 @@ class HomeViewModel extends BaseViewModel {
   void clearSearch() {
     _searchQuery = '';
     _searchController.clear();
-    log.i("Search query cleared");
     _isSearching = false;
     notifyListeners();
   }
@@ -138,13 +136,9 @@ class HomeViewModel extends BaseViewModel {
 
   List<Map<String, dynamic>> get bookmarks {
     if (searchQuery.isEmpty) {
-      log.d("No search query, returning all bookmarks");
-      log.i("Bookmarks: $_bookmarks");
-      log.i("Search query: $searchQuery");
       return _bookmarks;
     }
 
-    log.i("Filtering bookmarks with search query: $searchQuery");
     return _bookmarks
         .where((bookmark) =>
             (bookmark['title']?.toLowerCase() ?? '')

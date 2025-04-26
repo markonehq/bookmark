@@ -35,38 +35,45 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-          title: Row(
-            children: [
-              Expanded(
-                child: viewModel._isSearching
-                    ? TextField(
-                        controller: viewModel._searchController,
-                        autofocus: true,
-                        onChanged: viewModel.updateSearchQuery,
-                        decoration: InputDecoration(
-                          hintText: "Search...",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100.w),
-                            borderSide: BorderSide.none,
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          prefixIcon: const Icon(Icons.search),
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: () {
-                              viewModel.clearSearch();
-                            },
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-              ),
-            ],
+          title: AnimatedContainer(
+            padding: EdgeInsets.only(left: 10.w),
+            duration: const Duration(milliseconds: 300),
+            alignment: viewModel._isSearching
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            width: viewModel._isSearching
+                ? MediaQuery.of(context).size.width - 90.w
+                : 0,
+            curve: Curves.easeInOut,
+            child: viewModel._isSearching
+                ? TextField(
+                    controller: viewModel._searchController,
+                    autofocus: true,
+                    cursorColor: Colors.orangeAccent[200],
+                    onChanged: viewModel.updateSearchQuery,
+                    decoration: InputDecoration(
+                      hintText: "Search...",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100.w),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          viewModel.clearSearch();
+                        },
+                      ),
+                    ),
+                  )
+                : null,
           ),
           actions: [
             if (!viewModel._isSearching)
               IconButton(
+                padding: EdgeInsets.only(right: 16.w),
                 icon: const Icon(Icons.search),
                 onPressed: () {
                   viewModel._isSearching = true;
@@ -84,57 +91,64 @@ class HomeView extends StatelessWidget {
           foregroundColor: Colors.white,
           child: const Icon(Icons.add),
         ),
-        body: Stack(
-          children: [
-            // Main Content
-            ScreenWrapper(
-              child: CustomScrollView(
-                slivers: [
-                  SliverPadding(
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
-                    sliver: SliverMasonryGrid.count(
-                      crossAxisCount: 2,
-                      itemBuilder: (context, index) {
-                        final bookmark = viewModel.bookmarks[index];
-                        return _buildBookmarkCard(bookmark, font);
-                      },
-                      childCount: viewModel.bookmarks.length,
-                      mainAxisSpacing: 10.h,
-                      crossAxisSpacing: 10.w,
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus(); // Dismiss the keyboard
+          },
+          child: Stack(
+            children: [
+              // Main Content
+              ScreenWrapper(
+                child: CustomScrollView(
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior
+                      .onDrag, // Automatically dismiss keyboard on drag
+                  slivers: [
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      sliver: SliverMasonryGrid.count(
+                        crossAxisCount: 2,
+                        itemBuilder: (context, index) {
+                          final bookmark = viewModel.bookmarks[index];
+                          return _buildBookmarkCard(bookmark, font);
+                        },
+                        childCount: viewModel.bookmarks.length,
+                        mainAxisSpacing: 10.h,
+                        crossAxisSpacing: 10.w,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            // Fade Effect
-            Positioned(
-              top: 95.h,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 40.0.h,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      context.colorScheme.scaffoldColor,
-                      context.colorScheme.scaffoldColor.withOpacity(0.9),
-                      context.colorScheme.scaffoldColor.withOpacity(0.8),
-                      context.colorScheme.scaffoldColor.withOpacity(0.7),
-                      context.colorScheme.scaffoldColor.withOpacity(0.6),
-                      context.colorScheme.scaffoldColor.withOpacity(0.5),
-                      context.colorScheme.scaffoldColor.withOpacity(0.4),
-                      context.colorScheme.scaffoldColor.withOpacity(0.3),
-                      context.colorScheme.scaffoldColor.withOpacity(0.2),
-                      context.colorScheme.scaffoldColor.withOpacity(0.1),
-                      context.colorScheme.scaffoldColor.withOpacity(0.0),
-                    ],
+              // Fade Effect
+              Positioned(
+                top: 95.h,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 40.0.h,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        context.colorScheme.scaffoldColor,
+                        context.colorScheme.scaffoldColor.withOpacity(0.9),
+                        context.colorScheme.scaffoldColor.withOpacity(0.8),
+                        context.colorScheme.scaffoldColor.withOpacity(0.7),
+                        context.colorScheme.scaffoldColor.withOpacity(0.6),
+                        context.colorScheme.scaffoldColor.withOpacity(0.5),
+                        context.colorScheme.scaffoldColor.withOpacity(0.4),
+                        context.colorScheme.scaffoldColor.withOpacity(0.3),
+                        context.colorScheme.scaffoldColor.withOpacity(0.2),
+                        context.colorScheme.scaffoldColor.withOpacity(0.1),
+                        context.colorScheme.scaffoldColor.withOpacity(0.0),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
