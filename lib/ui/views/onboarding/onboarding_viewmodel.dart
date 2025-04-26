@@ -5,7 +5,7 @@ class OnboardingViewModel extends BaseViewModel {
   final NavigationService navigationService = locator<NavigationService>();
   void init() {
     Future.delayed(const Duration(seconds: 1), () {
-      navigationService.clearStackAndShow(Routes.bottomNavView);
+      navigationService.clearStackAndShow(Routes.homeView);
     });
   }
 }

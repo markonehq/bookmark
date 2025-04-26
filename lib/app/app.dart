@@ -1,5 +1,3 @@
-import 'package:bookmark/ui/views/bottom_nav/bottom_nav_view.dart';
-import 'package:bookmark/ui/views/chat/chat_view.dart';
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -15,9 +13,7 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
   routes: [
     MaterialRoute(page: StartupView, initial: true),
     MaterialRoute(page: HomeView),
-    MaterialRoute(page: BottomNavView),
     MaterialRoute(page: OnboardingView),
-    MaterialRoute(page: ChatView),
     // @stacked-route
   ],
   dependencies: [
