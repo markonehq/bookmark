@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:bookmark/app/app.locator.dart';
+import 'package:bookmark/app/app.logger.dart';
+import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yourappname/ui/common/ui_helpers.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-import 'startup_viewmodel.dart';
+part 'startup_viewmodel.dart';
 
 class StartupView extends StatelessWidget {
   const StartupView({super.key});
@@ -18,14 +21,13 @@ class StartupView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Splash Screen',
+                'Bookmark',
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Loading ...', style: TextStyle(fontSize: 16)),
-                  horizontalSpaceSmall,
                   SizedBox(
                     width: 16,
                     height: 16,

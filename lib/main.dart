@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:yourappname/app/app.bottomsheets.dart';
-import 'package:yourappname/app/app.dialogs.dart';
-import 'package:yourappname/app/app.locator.dart';
-import 'package:yourappname/app/app.router.dart';
-import 'package:yourappname/services/theme_service.dart';
-import 'package:yourappname/ui/common/app_colors.dart';
-import 'package:yourappname/utils/extension.dart';
+import 'package:bookmark/utils/file_exporter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +29,7 @@ class _MainAppState extends State<MainApp> {
           builder: (_, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Your App Name',
+              title: 'Bookmark',
               theme: ThemeData(
                 scaffoldBackgroundColor: context.colorScheme.backgroundLight,
                 brightness: Brightness.light,

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:yourappname/app/app.locator.dart';
-import 'package:yourappname/services/local_storage_service.dart';
+import 'package:bookmark/app/app.locator.dart';
+import 'package:bookmark/services/local_storage_service.dart';
 
 @lazySingleton
 class ThemeService {

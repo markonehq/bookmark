@@ -1,18 +1,15 @@
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:yourappname/app/app.locator.dart';
-import 'package:yourappname/app/app.router.dart';
+part of 'startup_view.dart';
 
 class StartupViewModel extends BaseViewModel {
+  final log = getLogger("StartupViewModel");
   final _navigationService = locator<NavigationService>();
 
-  // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
-    await Future.delayed(const Duration(seconds: 3));
-
-    // This is where you can make decisions on where your app should navigate when
-    // you have custom startup logic
-
-    _navigationService.replaceWithHomeView();
+    await Future.delayed(const Duration(seconds: 4));
+    _navigationService.replaceWithTransition(
+      const OnboardingView(),
+      transitionStyle: Transition.zoom,
+      duration: const Duration(milliseconds: 400),
+    );
   }
 }

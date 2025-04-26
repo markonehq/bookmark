@@ -53,6 +53,10 @@ extension ColorSchemeExtension on ColorScheme {
   // Warning Colors
   Color get warning => const Color(0xFFFF9800);
 
+  // Bottom Nav
+  Color get bottomNavActive => const Color(0xFF5FCF80);
+  Color get bottomNavInactive => const Color(0xFFa6a6a7);
+
   // Navigation Bar
   // Color get bottomNavBarBg => brightness == Brightness.dark ? black : white;
   // Color get unSelectedBottomNavIcon => const Color(0xFFA0A0A0);

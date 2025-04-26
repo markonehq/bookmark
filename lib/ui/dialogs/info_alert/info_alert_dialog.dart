@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yourappname/ui/common/app_colors.dart';
-import 'package:yourappname/ui/common/ui_helpers.dart';
-import 'package:yourappname/utils/extension.dart';
+import 'package:bookmark/ui/common/app_colors.dart';
+
+import 'package:bookmark/utils/extension.dart';
 
 import 'info_alert_dialog_model.dart';
 
@@ -46,7 +46,6 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w900),
                       ),
-                      verticalSpaceTiny,
                       Text(
                         request.description!,
                         style: TextStyle(
@@ -76,7 +75,6 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                 )
               ],
             ),
-            verticalSpaceMedium,
             GestureDetector(
               onTap: () => completer(DialogResponse(
                 confirmed: true,

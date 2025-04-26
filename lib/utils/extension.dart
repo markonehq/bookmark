@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yourappname/utils/font.dart';
+import 'package:bookmark/ui/common/app_font.dart';
 
-extension BuildContextExtension on BuildContext {
+extension ThemeContextExtension on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
+  TextTheme get textTheme => Theme.of(this).textTheme;
 }
 
-extension FontThemeExtension on BuildContext {
-  FontTheme get font {
-    return FontTheme();
-  }
+extension FontThemeContextExtension on BuildContext {
+  static final FontTheme _fontTheme = FontTheme();
+
+  FontTheme get font => _fontTheme;
 }
