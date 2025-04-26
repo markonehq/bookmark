@@ -12,10 +12,69 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final font = FontTheme();
     return ViewModelBuilder<HomeViewModel>.reactive(
-      onViewModelReady: (viewModel) => viewModel.incrementCounter(),
+      onViewModelReady: (viewModel) => viewModel.init(),
       viewModelBuilder: () => HomeViewModel(),
-      builder: (context, model, child) => Scaffold(
+      builder: (context, viewModel, child) => Scaffold(
         extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
+          toolbarHeight: 40.h,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 16.w),
+            child: GestureDetector(
+              onTap: () {
+                viewModel.showCustomBottomSheet();
+              },
+              child: const CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://imgs.search.brave.com/nDr89etkh9EIRa6XoIrs7H-H85JZ16PHYa01Sdnftws/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWd2/My5mb3Rvci5jb20v/aW1hZ2VzL2dhbGxl/cnkvZ2VuZXJhdGUt/YS1yZWFsaXN0aWMt/YWktYXZhdGFyLW9m/LWEtZmFzaGlvbi1t/YW4taW4tZm90b3Iu/anBn",
+                ),
+              ),
+            ),
+          ),
+          title: Row(
+            children: [
+              Expanded(
+                child: viewModel._isSearching
+                    ? TextField(
+                        controller: viewModel._searchController,
+                        autofocus: true,
+                        onChanged: viewModel.updateSearchQuery,
+                        decoration: InputDecoration(
+                          hintText: "Search...",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(100.w),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey[200],
+                          prefixIcon: const Icon(Icons.search),
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              viewModel.clearSearch();
+                            },
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ],
+          ),
+          actions: [
+            if (!viewModel._isSearching)
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  viewModel._isSearching = true;
+                  viewModel.notifyListeners();
+                },
+              ),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           onPressed: () {
@@ -36,10 +95,10 @@ class HomeView extends StatelessWidget {
                     sliver: SliverMasonryGrid.count(
                       crossAxisCount: 2,
                       itemBuilder: (context, index) {
-                        final bookmark = model.bookmarks[index];
+                        final bookmark = viewModel.bookmarks[index];
                         return _buildBookmarkCard(bookmark, font);
                       },
-                      childCount: model.bookmarks.length,
+                      childCount: viewModel.bookmarks.length,
                       mainAxisSpacing: 10.h,
                       crossAxisSpacing: 10.w,
                     ),
@@ -105,7 +164,7 @@ class HomeView extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   bookmark['username'],
-                  style: font.small(color: Colors.grey[400]),
+                  style: font.small(color: Colors.blue[400]),
                 ),
               ],
             ),

@@ -1,0 +1,2 @@
+/Users/santosh/Projects/bookmark/android/app/.cxx/Debug/6p1z3d6y/x86/CMakeFiles/rebuild_cache.dir
+/Users/santosh/Projects/bookmark/android/app/.cxx/Debug/6p1z3d6y/x86/CMakeFiles/edit_cache.dir
