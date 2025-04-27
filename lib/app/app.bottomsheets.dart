@@ -7,10 +7,12 @@
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
+import '../ui/bottom_sheets/search/search_sheet.dart';
 import '../ui/bottom_sheets/settings/settings_sheet.dart';
 
 enum BottomSheetType {
   settings,
+  search,
 }
 
 void setupBottomSheetUi() {
@@ -19,6 +21,8 @@ void setupBottomSheetUi() {
   final Map<BottomSheetType, SheetBuilder> builders = {
     BottomSheetType.settings: (context, request, completer) =>
         SettingsSheet(request: request, completer: completer),
+    BottomSheetType.search: (context, request, completer) =>
+        SearchSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

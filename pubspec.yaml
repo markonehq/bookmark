@@ -20,6 +20,9 @@ dependencies:
   stacked_services: ^1.1.0
   logger: ^2.5.0
   flutter_staggered_grid_view: ^0.7.0
+  flutter_markdown: ^0.7.7
+  metadata_fetch: ^0.4.1
+  flutter_speed_dial: ^5.0.0
 
 dev_dependencies:
   build_runner: ^2.4.5
