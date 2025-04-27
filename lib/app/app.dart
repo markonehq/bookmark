@@ -23,6 +23,7 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: LocalStorageService),
+    LazySingleton(classType: HomeViewModel),
     // @stacked-service
   ],
   bottomsheets: [
