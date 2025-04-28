@@ -1,10 +1,12 @@
-part of 'home_view.dart';
+part of 'search_view.dart';
 
-class HomeViewModel extends BaseViewModel {
-  final log = getLogger("HomeViewModel");
-  final BottomSheetService bottomSheetService = locator<BottomSheetService>();
+class SearchViewmodel extends BaseViewModel {
+  final log = getLogger("SearchViewmodel");
   final NavigationService navigationService = locator<NavigationService>();
-
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+  void init() {}
   final List<Map<String, dynamic>> _bookmarks = [
     {
       'type': 'pinterest',
@@ -98,45 +100,6 @@ class HomeViewModel extends BaseViewModel {
     },
   ];
 
-  bool _isSearching = false;
-  bool get isSearching => _isSearching;
-  set isSearching(bool value) {
-    _isSearching = value;
-    notifyListeners();
-  }
-
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-  String get searchQuery => _searchQuery;
-
-  void updateSearchQuery(String query) {
-    log.i("Search query updated: $query");
-    _searchQuery = query;
-    notifyListeners();
-  }
-
-  void clearSearch() {
-    _searchQuery = '';
-    _searchController.clear();
-    log.i("Search query cleared");
-    _isSearching = false;
-    notifyListeners();
-  }
-
-  void init() {
-    log.i("HomeViewModel initialized");
-  }
-
-  Future showCustomBottomSheet() async {
-    await bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.settings,
-      ignoreSafeArea: true,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-    );
-  }
-
   List<Map<String, dynamic>> get bookmarks {
     if (searchQuery.isEmpty) {
       log.d("No search query, returning all bookmarks");
@@ -157,13 +120,17 @@ class HomeViewModel extends BaseViewModel {
         .toList();
   }
 
-  void onSearchIconTap() {
-    _isSearching = !_isSearching;
+  void updateSearchQuery(String query) {
+    log.i("Search query updated: $query");
+    _searchQuery = query;
     notifyListeners();
   }
 
-  void navigateToSearch() {
-    log.i("Navigating to search view");
-    navigationService.navigateTo(Routes.searchView);
+  void clearSearch(BuildContext context) {
+    _searchQuery = '';
+    _searchController.clear();
+    FocusScope.of(context).unfocus();
+    log.i("Search query cleared");
+    notifyListeners();
   }
 }

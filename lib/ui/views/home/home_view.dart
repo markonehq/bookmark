@@ -69,8 +69,9 @@ class HomeView extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.search),
                 onPressed: () {
-                  viewModel._isSearching = true;
-                  viewModel.notifyListeners();
+                  viewModel.navigateToSearch();
+                  // viewModel._isSearching = true;
+                  // viewModel.notifyListeners();
                 },
               ),
           ],

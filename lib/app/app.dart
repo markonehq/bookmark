@@ -1,4 +1,5 @@
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
+import 'package:bookmark/ui/views/search/search_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:bookmark/services/local_storage_service.dart';
@@ -14,6 +15,8 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
     MaterialRoute(page: StartupView, initial: true),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: OnboardingView),
+    MaterialRoute(page: SearchView),
+
     // @stacked-route
   ],
   dependencies: [
