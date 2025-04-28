@@ -3,11 +3,8 @@ import 'package:bookmark/utils/file_exporter.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterError.onError = (FlutterErrorDetails details) {
-    if (details.exceptionAsString().contains('KeyUpEvent')) {
-      debugPrint('KeyUpEvent error caught: ${details.exception}');
-    } else {
-      FlutterError.presentError(details);
-    }
+    debugPrint(details.toString());
+    FlutterError.presentError(details);
   };
   await setupLocator();
   setupDialogUi();

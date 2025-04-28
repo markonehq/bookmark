@@ -39,7 +39,7 @@ Widget _buildBookmarkCard(Bookmark data, FontTheme font,
           padding: EdgeInsets.all(12.w),
           child: Text(
             title,
-            style: font.caption(fontWeight: FontWeight.w500),
+            style: font.b3(fontWeight: FontWeight.w500),
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
           ),
@@ -70,7 +70,7 @@ Widget _buildBookmarkCard(Bookmark data, FontTheme font,
                     link
                         .replaceAll(RegExp(r'^(https?:\/\/)?(www\.)?'), '')
                         .split('/')[0],
-                    style: font.caption(color: Colors.blue[700]),
+                    style: font.b3(color: Colors.blue[700]),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
