@@ -33,7 +33,7 @@ class SearchSheet extends StackedView<SearchSheetModel> {
             Center(
               child: Text(
                 'Search',
-                style: font.body(fontWeight: FontWeight.bold, fontSize: 18),
+                style: font.b3(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
             SizedBox(height: 16.h),
@@ -86,7 +86,7 @@ class SearchSheet extends StackedView<SearchSheetModel> {
                       children: [
                         const Icon(Icons.done_outlined, size: 8),
                         SizedBox(width: 8.w),
-                        Expanded(child: Text(source, style: font.body())),
+                        Expanded(child: Text(source, style: font.b3())),
                       ],
                     ),
                   );
