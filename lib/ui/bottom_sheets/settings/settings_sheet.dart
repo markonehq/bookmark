@@ -219,6 +219,10 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
+                    leading: Icon(
+                      Icons.ios_share_rounded,
+                      color: Colors.orange[700],
+                    ),
                     title: Text(
                       "Share App",
                       style: font.b3(),
@@ -229,6 +233,10 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
+                    leading: Icon(
+                      Icons.star_rate_rounded,
+                      color: Colors.orange[700],
+                    ),
                     title: Text(
                       "Rate App",
                       style: font.b3(),
@@ -238,6 +246,10 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                   ListTile(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
+                    ),
+                    leading: Icon(
+                      Icons.bug_report_rounded,
+                      color: Colors.orange[700],
                     ),
                     title: Text(
                       "Bug Report",
