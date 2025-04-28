@@ -1,4 +1,5 @@
 import 'package:bookmark/ui/common/app_font.dart';
+import 'package:bookmark/ui/views/search/search_viewcomponents.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:bookmark/utils/screen_wrapper.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -46,15 +47,15 @@ class SearchView extends StatelessWidget {
                           child: ClipOval(
                             child: TextButton(
                               onPressed: () {
-                                model.clearSearch(context);
+                                model.showSummery();
                               },
                               style: TextButton.styleFrom(
                                   backgroundColor:
                                       const Color.fromARGB(255, 39, 39, 39),
                                   foregroundColor: Colors.white,
                                   padding: EdgeInsets.all(0.w)),
-                              child: Text("✨",
-                                  style: TextStyle(fontSize: 18.sp)),
+                              child:
+                                  Text("✨", style: TextStyle(fontSize: 18.sp)),
                             ),
                           ),
                         ),
@@ -73,13 +74,12 @@ class SearchView extends StatelessWidget {
                     .fadeIn(duration: 500.ms)
                     .slide(begin: const Offset(0, 0.3)),
               ),
-              model.searchQuery.isNotEmpty
+              model.searchQuery.isNotEmpty && !model._isShowSummery
                   ? Expanded(
                       child: AnimatedSwitcher(
-                        duration: 400.ms, // speed of animation
+                        duration: 400.ms,
                         child: ScreenWrapper(
-                          key: ValueKey(
-                              model.searchQuery), // <-- this is important
+                          key: ValueKey(model.searchQuery),
                           child: CustomScrollView(
                             slivers: [
                               SliverPadding(
@@ -105,13 +105,15 @@ class SearchView extends StatelessWidget {
                         ),
                       ),
                     )
-                  : const Expanded(
-                      child: Center(
-                        child: Text(
-                          "Search for bookmarks",
+                  : model._isShowSummery
+                      ? const Expanded(child: BookmarkSummeryTabview())
+                      : const Expanded(
+                          child: Center(
+                            child: Text(
+                              "Search for bookmarks",
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
             ],
           ),
         ),

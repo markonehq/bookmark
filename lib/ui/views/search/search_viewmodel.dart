@@ -1,12 +1,18 @@
 part of 'search_view.dart';
 
 class SearchViewmodel extends BaseViewModel {
+  void init() {}
   final log = getLogger("SearchViewmodel");
   final NavigationService navigationService = locator<NavigationService>();
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
-  void init() {}
+  bool _isShowSummery = false;
+  bool get isShowSummery => _isShowSummery;
+  final List<Tab> myTabs = <Tab>[
+    const Tab(text: 'Summery'),
+    const Tab(text: 'Sources'),
+  ];
   final List<Map<String, dynamic>> _bookmarks = [
     {
       'type': 'pinterest',
@@ -121,6 +127,7 @@ class SearchViewmodel extends BaseViewModel {
   }
 
   void updateSearchQuery(String query) {
+    _isShowSummery = false;
     log.i("Search query updated: $query");
     _searchQuery = query;
     notifyListeners();
@@ -129,8 +136,16 @@ class SearchViewmodel extends BaseViewModel {
   void clearSearch(BuildContext context) {
     _searchQuery = '';
     _searchController.clear();
+    _isShowSummery = false;
     FocusScope.of(context).unfocus();
     log.i("Search query cleared");
     notifyListeners();
+  }
+
+  void showSummery() {
+    _isShowSummery = true;
+    log.i("Showing summary of bookmarks");
+    notifyListeners();
+    // Implement the logic to show a summary of bookmarks here
   }
 }
