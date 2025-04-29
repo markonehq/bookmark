@@ -1,6 +1,6 @@
 name: bookmark
 description: A AI assistant for your bookmarks
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 # Major.Minor.Patch+Build
 # MAJOR – Breaking changes (e.g., API redesign).
@@ -8,7 +8,7 @@ version: 1.0.0+1
 # PATCH – Bug fixes or small changes.
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -20,10 +20,12 @@ dependencies:
   stacked_services: ^1.1.0
   logger: ^2.5.0
   flutter_staggered_grid_view: ^0.7.0
+  flutter_animate: ^4.5.2
   flutter_markdown: ^0.7.7
   metadata_fetch: ^0.4.1
   flutter_speed_dial: ^5.0.0
   flutter_svg: ^2.1.0
+  shimmer: ^3.0.0
   firebase_core: ^3.13.0
   # firebase_analytics: ^11.4.5
   firebase_auth: ^5.5.3

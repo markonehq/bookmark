@@ -3,6 +3,7 @@ import 'package:bookmark/services/firestore_service.dart';
 import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/views/auth/auth_view.dart';
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
+import 'package:bookmark/ui/views/search/search_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:bookmark/services/local_storage_service.dart';
@@ -19,6 +20,7 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: AuthView),
+    MaterialRoute(page: SearchView),
     // @stacked-route
   ],
   dependencies: [

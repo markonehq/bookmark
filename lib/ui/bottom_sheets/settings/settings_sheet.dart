@@ -2,9 +2,7 @@ import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';
-
 import 'package:flutter_svg/svg.dart';
-
 part 'settings_sheet_model.dart';
 
 class SettingsSheet extends StackedView<SettingsSheetModel> {
@@ -55,6 +53,36 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                     height: 50.h,
                     colorFilter: ColorFilter.mode(
                         Colors.deepOrange[600]!, BlendMode.srcIn),
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.only(
+          top: 6.h,
+          left: 6.w,
+          right: 6.w,
+          bottom: 0.h,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        decoration: BoxDecoration(
+          color: context.colorScheme.white.withAlpha(252),
+          borderRadius: BorderRadius.vertical(
+              top: Radius.circular(24.w), bottom: Radius.circular(24.w)),
+        ),
+        child: Wrap(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  "assets/icons/settings/gear.svg",
+                  width: 50.w,
+                  height: 50.h,
+                  colorFilter: ColorFilter.mode(
+                      Colors.deepOrange[600]!, BlendMode.srcIn),
+                ),
+                Text(
+                  "General",
+                  style: font.b1(
+                    fontWeight: FontWeight.bold,
                   ),
                   Text(
                     "General",
