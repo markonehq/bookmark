@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:bookmark/app/app.locator.dart';
-import 'package:bookmark/app/app.logger.dart';
-import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:bookmark/services/auth_service.dart';
+import 'package:bookmark/services/local_storage_service.dart';
+import 'package:bookmark/ui/common/app_font.dart';
+import 'package:bookmark/utils/assets_constants.dart';
+import 'package:bookmark/utils/file_exporter.dart';
 
 part 'startup_viewmodel.dart';
 
@@ -15,25 +14,43 @@ class StartupView extends StatelessWidget {
     return ViewModelBuilder<StartupViewModel>.nonReactive(
       viewModelBuilder: () => StartupViewModel(),
       onViewModelReady: (model) => model.runStartupLogic(),
-      builder: (context, model, child) => const Scaffold(
+      builder: (context, model, child) => Scaffold(
+        backgroundColor: context.colorScheme.scaffoldColor,
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12).w,
+                child: Image.asset(
+                  AssetsConstants.logo,
+                  width: 100.w,
+                  height: 100.h,
+                  cacheWidth: 100,
+                  cacheHeight: 100,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              12.verticalSpace,
               Text(
                 'Bookmark',
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                style: model.font.h2(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Loading ...', style: TextStyle(fontSize: 16)),
-                  SizedBox(
+                  Text(
+                    'Loading  ',
+                    style: model.font.b2(),
+                  ),
+                  const SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
                       color: Colors.black,
-                      strokeWidth: 6,
+                      strokeWidth: 2,
                     ),
                   )
                 ],

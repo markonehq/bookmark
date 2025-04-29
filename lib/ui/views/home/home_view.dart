@@ -1,3 +1,4 @@
+import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/ui/common_widgets/loading_shimmer.dart';
 import 'package:bookmark/utils/file_exporter.dart';
@@ -20,62 +21,59 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onViewModelReady: (viewModel) => viewModel.init(),
       viewModelBuilder: () => HomeViewModel(),
-      builder: (context, viewModel, child) => SafeArea(
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            surfaceTintColor: Colors.transparent,
-            toolbarHeight: 40.h,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Padding(
-              padding: EdgeInsets.only(left: 16.w),
-              child: GestureDetector(
+      builder: (context, viewModel, child) => Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
+          toolbarHeight: 40.h,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 16.w),
+            child: GestureDetector(
                 onTap: () {
                   viewModel.showSettingBottomSheet();
                 },
-                child: const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    "https://imgs.search.brave.com/nDr89etkh9EIRa6XoIrs7H-H85JZ16PHYa01Sdnftws/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWd2/My5mb3Rvci5jb20v/aW1hZ2VzL2dhbGxl/cnkvZ2VuZXJhdGUt/YS1yZWFsaXN0aWMt/YWktYXZhdGFyLW9m/LWEtZmFzaGlvbi1t/YW4taW4tZm90b3Iu/anBn",
-                  ),
-                ),
-              ),
-            ),
-            title: AnimatedContainer(
-              padding: EdgeInsets.only(left: 10.w),
-              duration: const Duration(milliseconds: 300),
-              alignment: viewModel._isSearching
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
-              width: viewModel._isSearching
-                  ? MediaQuery.of(context).size.width - 90.w
-                  : 0,
-              curve: Curves.easeInOut,
-              child: viewModel._isSearching
-                  ? TextField(
-                      controller: viewModel._searchController,
-                      autofocus: true,
-                      onSubmitted: (String value) {
-                        viewModel.showSearchBottomSheet();
-                      },
-                      cursorColor: Colors.orangeAccent[200],
-                      onChanged: viewModel.updateSearchQuery,
-                      decoration: InputDecoration(
-                        hintText: "Search...",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.w),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        prefixIcon: const Icon(Icons.search),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            viewModel.clearSearch();
-                          },
-                        ),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(viewModel.avatar),
+                  radius: 20.w,
+                  backgroundColor: Colors.grey[300],
+                )),
+          ),
+          title: AnimatedContainer(
+            padding: EdgeInsets.only(left: 10.w),
+            duration: const Duration(milliseconds: 300),
+            alignment: viewModel._isSearching
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            width: viewModel._isSearching
+                ? MediaQuery.of(context).size.width - 90.w
+                : 0,
+            curve: Curves.easeInOut,
+            child: viewModel._isSearching
+                ? TextField(
+                    controller: viewModel._searchController,
+                    autofocus: true,
+                    onSubmitted: (String value) {
+                      viewModel.showSearchBottomSheet();
+                    },
+                    cursorColor: Colors.orangeAccent[200],
+                    onChanged: viewModel.updateSearchQuery,
+                    decoration: InputDecoration(
+                      hintText: "Search...",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100.w),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          viewModel.clearSearch();
+                        },
                       ),
                     )
                   : null,
