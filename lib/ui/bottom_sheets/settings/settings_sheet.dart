@@ -1,4 +1,5 @@
 import 'package:bookmark/ui/common/app_font.dart';
+import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -41,7 +42,7 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  "assets/icons/settings/gear.svg",
+                  AssetsConstants.gear,
                   width: 50.w,
                   height: 50.h,
                   color: Colors.deepOrange[600],

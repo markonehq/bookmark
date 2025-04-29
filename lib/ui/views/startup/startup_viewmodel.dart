@@ -3,6 +3,7 @@ part of 'startup_view.dart';
 class StartupViewModel extends BaseViewModel {
   final log = getLogger("StartupViewModel");
   final _navigationService = locator<NavigationService>();
+  final font = FontTheme();
 
   Future runStartupLogic() async {
     await Future.delayed(const Duration(seconds: 4));
