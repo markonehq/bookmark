@@ -1,9 +1,23 @@
+import 'dart:io';
+
+import 'package:bookmark/firebase_options.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try {
+    debugPrint('🔥 Initializing Firebase...');
+    if (Platform.isAndroid) {
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+    } else if (Platform.isIOS) {
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.ios);
+    }
+    debugPrint('✅ Firebase Initialized!');
+  } catch (e, stack) {
+    debugPrint('❌ Firebase init error: $e');
+    debugPrint('$stack');
+  }
   FlutterError.onError = (FlutterErrorDetails details) {
     debugPrint(details.toString());
     FlutterError.presentError(details);
