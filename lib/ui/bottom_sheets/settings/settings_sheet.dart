@@ -1,6 +1,6 @@
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/utils/file_exporter.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter_svg/svg.dart';
 
 part 'settings_sheet_model.dart';

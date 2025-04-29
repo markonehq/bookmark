@@ -128,7 +128,7 @@ class HomeView extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100.r),
               ),
-              child: const Icon(Icons.note),
+              child: const Icon(Icons.note_alt_rounded),
               backgroundColor: context.colorScheme.black,
               foregroundColor: context.colorScheme.white,
               // label: 'Notes',
