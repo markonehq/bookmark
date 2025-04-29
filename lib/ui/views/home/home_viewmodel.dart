@@ -26,7 +26,8 @@ class HomeViewModel extends BaseViewModel {
 
   final List<Bookmark> _bookmarks = [
     Bookmark(
-      link: "https://www.google.com",
+      link:
+          "https://timesofindia.indiatimes.com/travel/destinations/places-to-visit-in-jammu-the-key-attractions-of-this-heavenly-land/articleshow/59557249.cms",
       title: "Google",
       description:
           "Search the world's information, including webpages, images, videos and more.",
@@ -96,7 +97,7 @@ class HomeViewModel extends BaseViewModel {
   void init() async {
     setBusy(true);
     for (var bookmark in _bookmarks) {
-      fetchOgData(bookmark);
+      await fetchOgData(bookmark);
     }
     setBusy(false);
   }

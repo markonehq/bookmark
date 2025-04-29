@@ -44,9 +44,10 @@ class SearchView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         SizedBox(
-                          width: 38.w,
-                          height: 38.h,
-                          child: ClipOval(
+                          width: 35.w,
+                          height: 39.h,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100.w),
                             child: TextButton(
                               onPressed: () {
                                 model.showSummery();
@@ -55,9 +56,9 @@ class SearchView extends StatelessWidget {
                                   backgroundColor:
                                       const Color.fromARGB(255, 39, 39, 39),
                                   foregroundColor: Colors.white,
-                                  padding: EdgeInsets.all(0.w)),
+                                  padding: const EdgeInsets.all(0)),
                               child:
-                                  Text("✨", style: TextStyle(fontSize: 18.sp)),
+                                  Text("💫", style: TextStyle(fontSize: 15.sp)),
                             ),
                           ),
                         ),
@@ -79,7 +80,7 @@ class SearchView extends StatelessWidget {
               model.searchQuery.isNotEmpty && !model._isShowSummery
                   ? Expanded(
                       child: AnimatedSwitcher(
-                        duration: 400.ms,
+                        duration: const Duration(milliseconds: 400),
                         child: ScreenWrapper(
                           child: CustomScrollView(
                             keyboardDismissBehavior:

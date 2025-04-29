@@ -25,6 +25,7 @@ dependencies:
   metadata_fetch: ^0.4.1
   flutter_speed_dial: ^5.0.0
   flutter_svg: ^2.1.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   build_runner: ^2.4.5

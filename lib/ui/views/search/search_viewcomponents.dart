@@ -1,4 +1,5 @@
 import 'package:bookmark/ui/common/app_font.dart';
+import 'package:bookmark/ui/common_widgets/loading_shimmer.dart';
 import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/ui/views/search/search_view.dart';
 import 'package:bookmark/utils/file_exporter.dart';
@@ -68,22 +69,27 @@ Widget buildBookmarkSearchPage(Bookmark data, FontTheme font,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Image section with loading state
         SizedBox(
           width: double.infinity,
-          child: viewModel.isBusy
-              ? const Center(child: CircularProgressIndicator())
-              : (imageUrl != null)
-                  ? Image.network(
-                      imageUrl,
-                      width: double.infinity,
-                      alignment: Alignment.topCenter,
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) {
-                        return const SizedBox.shrink();
-                      },
-                    )
-                  : null,
+          height: 150,
+          child: Image.network(
+            imageUrl ?? data.ogImage ?? '',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 150,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child.animate().fadeIn(duration: 400.ms);
+              } else {
+                return buildShimmer(
+                  height: 150,
+                  borderRadius: BorderRadius.circular(12),
+                );
+              }
+            },
+            errorBuilder: (context, error, stackTrace) =>
+                const Icon(Icons.broken_image),
+          ),
         ),
 
         Padding(
