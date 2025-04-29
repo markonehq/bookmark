@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "559317773806",
+    "project_id": "markonehq-bookmark",
+    "storage_bucket": "markonehq-bookmark.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559317773806:android:ec38dbb19ffecd522fb2ff",
+        "android_client_info": {
+          "package_name": "com.markone.bookmark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8l958SeAg7b2q2PAxH-OQmPF3iNRQahA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
