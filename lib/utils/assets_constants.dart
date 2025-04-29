@@ -7,4 +7,5 @@ class AssetsConstants {
 
   // Icons
   static const String gear = '$_baseIconUrl/settings/gear.svg';
+  static const String google = '$_baseIconUrl/auth/google.svg';
 }

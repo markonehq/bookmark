@@ -1,3 +1,4 @@
+import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:bookmark/utils/screen_wrapper.dart';
@@ -29,15 +30,14 @@ class HomeView extends StatelessWidget {
           leading: Padding(
             padding: EdgeInsets.only(left: 16.w),
             child: GestureDetector(
-              onTap: () {
-                viewModel.showSettingBottomSheet();
-              },
-              child: const CircleAvatar(
-                backgroundImage: NetworkImage(
-                  "https://imgs.search.brave.com/nDr89etkh9EIRa6XoIrs7H-H85JZ16PHYa01Sdnftws/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWd2/My5mb3Rvci5jb20v/aW1hZ2VzL2dhbGxl/cnkvZ2VuZXJhdGUt/YS1yZWFsaXN0aWMt/YWktYXZhdGFyLW9m/LWEtZmFzaGlvbi1t/YW4taW4tZm90b3Iu/anBn",
-                ),
-              ),
-            ),
+                onTap: () {
+                  viewModel.showSettingBottomSheet();
+                },
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(viewModel.avatar),
+                  radius: 20.w,
+                  backgroundColor: Colors.grey[300],
+                )),
           ),
           title: AnimatedContainer(
             padding: EdgeInsets.only(left: 10.w),

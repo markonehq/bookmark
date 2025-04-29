@@ -20,6 +20,12 @@ class Bookmark {
 class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewModel");
   final BottomSheetService bottomSheetService = locator<BottomSheetService>();
+  final _pref = locator<LocalStorageService>();
+
+  String name = "";
+  String email = "";
+  String avatar = "";
+  String uid = "";
 
   final Map<String, Bookmark> _ogDataCache = {};
 
@@ -94,6 +100,11 @@ class HomeViewModel extends BaseViewModel {
 
   void init() async {
     setBusy(true);
+    log.d("HomeViewModel initialized");
+    name = _pref.read('name') ?? '';
+    email = _pref.read('email') ?? '';
+    avatar = _pref.read('avatar') ?? '';
+    uid = _pref.read('uid') ?? '';
     for (var bookmark in _bookmarks) {
       fetchOgData(bookmark);
     }
