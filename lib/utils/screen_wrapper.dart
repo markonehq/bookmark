@@ -9,7 +9,7 @@ class ScreenWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: child,
       ),
     );

@@ -4,21 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FontTheme {
   static const String _defaultFont = 'Gilroy';
 
-  TextStyle display({
-    Color? color,
-    FontWeight fontWeight = FontWeight.w300,
-    double fontSize = 42,
-    String fontFamily = _defaultFont,
-  }) {
-    return TextStyle(
-      fontSize: fontSize.sp,
-      fontFamily: fontFamily,
-      fontWeight: fontWeight,
-      color: color,
-    );
-  }
-
-  TextStyle header({
+  // Header styles
+  TextStyle h1({
     Color? color,
     FontWeight fontWeight = FontWeight.w700,
     double fontSize = 34,
@@ -32,23 +19,9 @@ class FontTheme {
     );
   }
 
-  TextStyle eventCard({
+  TextStyle h2({
     Color? color,
     FontWeight fontWeight = FontWeight.w600,
-    double fontSize = 30,
-    String fontFamily = _defaultFont,
-  }) {
-    return TextStyle(
-      fontSize: fontSize.sp,
-      fontFamily: fontFamily,
-      fontWeight: fontWeight,
-      color: color,
-    );
-  }
-
-  TextStyle title({
-    Color? color,
-    FontWeight fontWeight = FontWeight.w500,
     double fontSize = 28,
     String fontFamily = _defaultFont,
   }) {
@@ -60,25 +33,23 @@ class FontTheme {
     );
   }
 
-  TextStyle title2({
+  TextStyle h3({
     Color? color,
-    FontWeight fontWeight = FontWeight.w300,
+    FontWeight fontWeight = FontWeight.w500,
     double fontSize = 22,
     String fontFamily = _defaultFont,
-    double? height,
   }) {
     return TextStyle(
       fontSize: fontSize.sp,
       fontFamily: fontFamily,
       fontWeight: fontWeight,
       color: color,
-      height: height,
     );
   }
 
-  TextStyle medium({
+  TextStyle h4({
     Color? color,
-    FontWeight fontWeight = FontWeight.w400,
+    FontWeight fontWeight = FontWeight.bold,
     double fontSize = 18,
     String fontFamily = _defaultFont,
   }) {
@@ -90,10 +61,10 @@ class FontTheme {
     );
   }
 
-  TextStyle paragraph({
+  TextStyle h5({
     Color? color,
-    FontWeight fontWeight = FontWeight.w400,
-    double fontSize = 20,
+    FontWeight fontWeight = FontWeight.bold,
+    double fontSize = 16,
     String fontFamily = _defaultFont,
   }) {
     return TextStyle(
@@ -104,7 +75,8 @@ class FontTheme {
     );
   }
 
-  TextStyle body({
+  // Body styles
+  TextStyle b1({
     Color? color,
     FontWeight fontWeight = FontWeight.w400,
     double fontSize = 16,
@@ -120,7 +92,7 @@ class FontTheme {
     );
   }
 
-  TextStyle caption({
+  TextStyle b2({
     Color? color,
     FontWeight fontWeight = FontWeight.w400,
     double fontSize = 14,
@@ -134,10 +106,38 @@ class FontTheme {
     );
   }
 
-  TextStyle small({
+  TextStyle b3({
     Color? color,
     FontWeight fontWeight = FontWeight.w400,
     double fontSize = 12,
+    String fontFamily = _defaultFont,
+  }) {
+    return TextStyle(
+      fontSize: fontSize.sp,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      color: color,
+    );
+  }
+
+  TextStyle b4({
+    Color? color,
+    FontWeight fontWeight = FontWeight.w300,
+    double fontSize = 10,
+    String fontFamily = _defaultFont,
+  }) {
+    return TextStyle(
+      fontSize: fontSize.sp,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      color: color,
+    );
+  }
+
+  TextStyle b5({
+    Color? color,
+    FontWeight fontWeight = FontWeight.w300,
+    double fontSize = 8,
     String fontFamily = _defaultFont,
   }) {
     return TextStyle(

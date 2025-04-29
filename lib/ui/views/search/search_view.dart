@@ -1,9 +1,11 @@
 import 'package:bookmark/ui/common/app_font.dart';
+import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/ui/views/search/search_viewcomponents.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:bookmark/utils/screen_wrapper.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:metadata_fetch/metadata_fetch.dart';
 
 part 'search_viewmodel.dart';
 
@@ -79,16 +81,21 @@ class SearchView extends StatelessWidget {
                       child: AnimatedSwitcher(
                         duration: 400.ms,
                         child: ScreenWrapper(
-                          key: ValueKey(model.searchQuery),
                           child: CustomScrollView(
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
                             slivers: [
                               SliverPadding(
                                 padding: EdgeInsets.symmetric(vertical: 16.h),
                                 sliver: SliverMasonryGrid.count(
                                   crossAxisCount: 2,
                                   itemBuilder: (context, index) {
-                                    final bookmark = model.bookmarks[index];
-                                    return _buildBookmarkCard(bookmark, font)
+                                    final link = model.bookmarks[index].link;
+                                    final bookmark = model._ogDataCache[link] ??
+                                        model.bookmarks[index];
+
+                                    return buildBookmarkSearchPage(
+                                            bookmark, font, model, context)
                                         .animate()
                                         .fadeIn(
                                             duration: 400.ms,
@@ -96,8 +103,8 @@ class SearchView extends StatelessWidget {
                                         .slide(begin: const Offset(0, 0.1));
                                   },
                                   childCount: model.bookmarks.length,
-                                  mainAxisSpacing: 10.h,
-                                  crossAxisSpacing: 10.w,
+                                  mainAxisSpacing: 4.h,
+                                  crossAxisSpacing: 4.w,
                                 ),
                               ),
                             ],
@@ -119,119 +126,5 @@ class SearchView extends StatelessWidget {
         ),
       )),
     );
-  }
-}
-
-Widget _buildBookmarkCard(Map<String, dynamic> bookmark, FontTheme font) {
-  switch (bookmark['type']) {
-    case 'twitter':
-      return Card(
-        color: Colors.black,
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                bookmark['preview'],
-                style:
-                    font.body(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                bookmark['text'],
-                style: font.caption(color: Colors.white70),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                bookmark['username'],
-                style: font.small(color: Colors.blue[400]),
-              ),
-            ],
-          ),
-        ),
-      );
-    case 'pinterest':
-      return Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(12.r),
-              ),
-              child: Image.network(
-                bookmark['image'],
-                width: double.infinity,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                bookmark['info'],
-                style: font.body(),
-              ),
-            ),
-          ],
-        ),
-      );
-    case 'website':
-      return Card(
-        color: Colors.blue[50],
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16.w,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(
-                      bookmark['favicon'],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      bookmark['title'],
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: font.body(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                bookmark['description'],
-                style: font.caption(),
-              ),
-              const SizedBox(height: 8),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  icon:
-                      const Icon(Icons.open_in_new_rounded, color: Colors.blue),
-                  onPressed: () {
-                    // Handle open website action
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    default:
-      return const SizedBox.shrink();
   }
 }

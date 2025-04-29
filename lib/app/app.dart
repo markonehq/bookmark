@@ -1,3 +1,4 @@
+import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
 import 'package:bookmark/ui/views/search/search_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -25,10 +26,12 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: LocalStorageService),
+    LazySingleton(classType: HomeViewModel),
     // @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: SettingsSheet),
+    StackedBottomsheet(classType: SearchSheet),
     // @stacked-bottom-sheet
   ],
   dialogs: [
