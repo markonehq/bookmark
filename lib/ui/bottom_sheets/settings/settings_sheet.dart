@@ -1,8 +1,6 @@
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/utils/file_exporter.dart';
-
 import 'package:flutter_svg/svg.dart';
-
 part 'settings_sheet_model.dart';
 
 class SettingsSheet extends StackedView<SettingsSheetModel> {
@@ -44,7 +42,8 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                   "assets/icons/settings/gear.svg",
                   width: 50.w,
                   height: 50.h,
-                  color: Colors.deepOrange[600],
+                  colorFilter: ColorFilter.mode(
+                      Colors.deepOrange[600]!, BlendMode.srcIn),
                 ),
                 Text(
                   "General",
