@@ -20,7 +20,7 @@ class StartupViewModel extends BaseViewModel {
       } else {
         log.d("User is not logged in");
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          _navigationService.replaceWithAuthView();
+          _navigationService.replaceWith(Routes.authView);
         });
       }
     } on Exception catch (e) {

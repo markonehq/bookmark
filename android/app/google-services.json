@@ -1,29 +1,54 @@
 {
-    "project_info": {
-        "project_number": "559317773806",
-        "project_id": "markonehq-bookmark",
-        "storage_bucket": "markonehq-bookmark.firebasestorage.app"
-    },
-    "client": [
-        {
-            "client_info": {
-                "mobilesdk_app_id": "1:559317773806:android:ec38dbb19ffecd522fb2ff",
-                "android_client_info": {
-                    "package_name": "com.markone.bookmark"
-                }
-            },
-            "oauth_client": [],
-            "api_key": [
-                {
-                    "current_key": "AIzaSyC8l958SeAg7b2q2PAxH-OQmPF3iNRQahA"
-                }
-            ],
-            "services": {
-                "appinvite_service": {
-                    "other_platform_oauth_client": []
-                }
-            }
+  "project_info": {
+    "project_number": "559317773806",
+    "project_id": "markonehq-bookmark",
+    "storage_bucket": "markonehq-bookmark.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559317773806:android:ec38dbb19ffecd522fb2ff",
+        "android_client_info": {
+          "package_name": "com.markone.bookmark"
         }
-    ],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "559317773806-bis98cdmh8qsjiva045h47m2s7rhvpvf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.markone.bookmark",
+            "certificate_hash": "34348e12e2913c626e956b5004f97af0e4e80852"
+          }
+        },
+        {
+          "client_id": "559317773806-6pamqcqiamk3h8v7n121r65v6qf1fk3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8l958SeAg7b2q2PAxH-OQmPF3iNRQahA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559317773806-6pamqcqiamk3h8v7n121r65v6qf1fk3o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "559317773806-q9blfl7iprcufatddpo0ukhmifl2lvsb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.markone.bookmark"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

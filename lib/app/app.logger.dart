@@ -41,9 +41,7 @@ class SimpleLogPrinter extends LogPrinter {
 
     if (exludeLogsFromClasses
             .any((excludeClass) => className == excludeClass) ||
-        (showOnlyClass != null && className != showOnlyClass)) {
-      return [];
-    }
+        (showOnlyClass != null && className != showOnlyClass)) return [];
 
     final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
     List<String> result = [];
