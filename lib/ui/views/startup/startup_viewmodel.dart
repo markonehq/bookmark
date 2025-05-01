@@ -8,7 +8,6 @@ class StartupViewModel extends BaseViewModel {
   final font = FontTheme();
 
   Future runStartupLogic() async {
-    await locator<LocalStorageService>().initStorage();
     log.d(_auth.currentUser);
     try {
       if (_auth.currentUser != null &&
