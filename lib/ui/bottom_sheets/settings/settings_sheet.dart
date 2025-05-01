@@ -38,9 +38,8 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                 decoration: BoxDecoration(
                   color: context.colorScheme.white.withAlpha(252),
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(24.w),
-                      bottom: Radius.circular(24.w)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(24.w)),
                 ),
                 child: Wrap(children: [
                   Column(
