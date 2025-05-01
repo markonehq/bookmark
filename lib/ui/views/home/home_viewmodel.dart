@@ -27,8 +27,7 @@ class HomeViewModel extends BaseViewModel {
   String avatar = "";
   String uid = "";
   final NavigationService navigationService = locator<NavigationService>();
-
-  final Map<String, Bookmark> _ogDataCache = {};
+  static final Map<String, Bookmark> ogDataCache = {};
 
   final List<Bookmark> _bookmarks = [
     Bookmark(
@@ -76,6 +75,7 @@ class HomeViewModel extends BaseViewModel {
           "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
     )
   ];
+  List<Bookmark> get getBookmarks => _bookmarks;
 
   bool _isSearching = false;
   bool get isSearching => _isSearching;
@@ -180,12 +180,12 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> fetchOgData(Bookmark bookmark) async {
     try {
-      if (_ogDataCache.containsKey(bookmark.link)) return;
+      if (ogDataCache.containsKey(bookmark.link)) return;
 
       final metadata = await MetadataFetch.extract(bookmark.link);
 
       if (metadata != null) {
-        _ogDataCache[bookmark.link] = Bookmark(
+        ogDataCache[bookmark.link] = Bookmark(
           title: metadata.title ?? bookmark.title,
           description: metadata.description ?? bookmark.description,
           imageUrl: metadata.image ?? bookmark.imageUrl,
@@ -200,15 +200,15 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Bookmark getOgData(Bookmark bookmark) {
-    if (!_ogDataCache.containsKey(bookmark.link)) {
+    if (!ogDataCache.containsKey(bookmark.link)) {
       log.d("No cached OG data for ${bookmark.link}, using bookmark data");
-      _ogDataCache[bookmark.link] = Bookmark(
+      ogDataCache[bookmark.link] = Bookmark(
         title: "${bookmark.title} (not fetched)",
         description: bookmark.description,
         imageUrl: bookmark.imageUrl,
         link: bookmark.link,
       );
     }
-    return _ogDataCache[bookmark.link]!;
+    return ogDataCache[bookmark.link]!;
   }
 }

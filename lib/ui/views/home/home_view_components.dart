@@ -1,7 +1,10 @@
 part of 'home_view.dart';
 
-Widget _buildBookmarkCard(Bookmark data, FontTheme font,
-    HomeViewModel viewModel, BuildContext context) {
+Widget buildBookmarkCard({
+  required Bookmark data,
+  required FontTheme font,
+  required BuildContext context,
+}){
   final title = data.title;
   // final description = data.description;
   final imageUrl = data.imageUrl;

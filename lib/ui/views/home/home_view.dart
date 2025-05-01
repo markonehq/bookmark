@@ -186,11 +186,13 @@ class HomeView extends StatelessWidget {
                               crossAxisCount: 2,
                               itemBuilder: (context, index) {
                                 final link = viewModel.bookmarks[index].link;
-                                final bookmark = viewModel._ogDataCache[link] ??
+                                final bookmark = HomeViewModel.ogDataCache[link] ??
                                     viewModel.bookmarks[index];
 
-                                return _buildBookmarkCard(
-                                        bookmark, font, viewModel, context)
+                                return buildBookmarkCard(
+                                        data: bookmark,
+                                        font: font,
+                                        context: context)
                                     .animate()
                                     .fadeIn(
                                         duration: 400.ms,

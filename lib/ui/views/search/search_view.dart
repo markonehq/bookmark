@@ -5,7 +5,6 @@ import 'package:bookmark/utils/file_exporter.dart';
 import 'package:bookmark/utils/screen_wrapper.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:metadata_fetch/metadata_fetch.dart';
 
 part 'search_viewmodel.dart';
 
@@ -92,11 +91,14 @@ class SearchView extends StatelessWidget {
                                   crossAxisCount: 2,
                                   itemBuilder: (context, index) {
                                     final link = model.bookmarks[index].link;
-                                    final bookmark = model._ogDataCache[link] ??
-                                        model.bookmarks[index];
+                                    final bookmark =
+                                        HomeViewModel.ogDataCache[link] ??
+                                            model.bookmarks[index];
 
-                                    return buildBookmarkSearchPage(
-                                            bookmark, font, model, context)
+                                    return buildBookmarkCard(
+                                            data: bookmark,
+                                            font: font,
+                                            context: context)
                                         .animate()
                                         .fadeIn(
                                             duration: 400.ms,
