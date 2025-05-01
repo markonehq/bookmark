@@ -1,4 +1,5 @@
 import 'package:bookmark/services/auth_service.dart' show AuthService;
+import 'package:bookmark/ui/common_widgets/loading_circular.dart';
 import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:flutter_svg/svg.dart';
