@@ -38,7 +38,7 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                 right: 6.w,
                 bottom: 0.h,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
               decoration: BoxDecoration(
                 color: context.colorScheme.white.withAlpha(252),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(24.w)),
@@ -53,8 +53,8 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                         right: 6.w,
                         bottom: 0.h,
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.w, vertical: 16.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 6.w, vertical: 10.h),
                       decoration: BoxDecoration(
                         color: context.colorScheme.white.withAlpha(252),
                         borderRadius: BorderRadius.vertical(
@@ -323,7 +323,7 @@ class SettingsSheet extends StackedView<SettingsSheetModel> {
                     ),
                   )
                 ])
-              ]))).animate().fadeIn(duration: 500.ms),
+              ]))),
     );
   }
 
