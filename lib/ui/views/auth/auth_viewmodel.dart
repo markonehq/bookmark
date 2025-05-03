@@ -11,6 +11,7 @@ class AuthViewModel extends BaseViewModel {
   Future<void> login() async {
     setBusy(true);
     try {
+      loadingCircular();
       final bool status = await authService.signInWithGoogle();
       if (status) {
         log.d("Login successful");

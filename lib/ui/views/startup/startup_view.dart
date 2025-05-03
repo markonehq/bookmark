@@ -1,6 +1,7 @@
 import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
+import 'package:bookmark/ui/common_widgets/loading_circular.dart';
 import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 
@@ -38,23 +39,7 @@ class StartupView extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Loading  ',
-                    style: model.font.b2(),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(
-                      color: Colors.black,
-                      strokeWidth: 2,
-                    ),
-                  )
-                ],
-              ),
+              loadingCircular(),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bookmark/firebase_options.dart';
+import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -23,6 +24,8 @@ Future<void> main() async {
     FlutterError.presentError(details);
   };
   await setupLocator();
+  await locator<LocalStorageService>().initStorage();
+
   setupDialogUi();
   setupBottomSheetUi();
   runApp(const MainApp());
