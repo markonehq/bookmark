@@ -73,6 +73,12 @@ class HomeViewModel extends BaseViewModel {
       title: "Youtube",
       description:
           "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+    ),
+    Bookmark(
+      link: "https://pin.it/1qJYRRc01",
+      title: "Think more, design less",
+      description:
+          "A place where words matter. Read, write, and share stories that matter.",
     )
   ];
   List<Bookmark> get getBookmarks => _bookmarks;
