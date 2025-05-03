@@ -60,7 +60,9 @@ class AuthView extends StatelessWidget {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10.h),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  model.showAuthSheet();
+                },
                 child: Text(
                   "Get Started",
                   style: context.textTheme.titleLarge?.copyWith(
