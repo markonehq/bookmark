@@ -18,7 +18,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final font = FontTheme();
     return ViewModelBuilder<HomeViewModel>.reactive(
       onViewModelReady: (viewModel) => viewModel.init(),
       viewModelBuilder: () => HomeViewModel(),
@@ -186,14 +185,8 @@ class HomeView extends StatelessWidget {
                                 crossAxisCount: 2,
                                 itemBuilder: (context, index) {
                                   final link = viewModel.bookmarks[index].link;
-                                  final bookmark =
-                                      HomeViewModel.ogDataCache[link] ??
-                                          viewModel.bookmarks[index];
 
-                                  return buildBookmarkCard(
-                                          data: bookmark,
-                                          font: font,
-                                          context: context)
+                                  return buildBookmarkCard(link, context)
                                       .animate()
                                       .fadeIn(
                                           duration: 400.ms,
