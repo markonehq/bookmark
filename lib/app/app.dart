@@ -1,5 +1,6 @@
 import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/firestore_service.dart';
+import 'package:bookmark/ui/bottom_sheets/auth/auth_sheet.dart';
 import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/views/auth/auth_view.dart';
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
@@ -38,6 +39,7 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
   bottomsheets: [
     StackedBottomsheet(classType: SettingsSheet),
     StackedBottomsheet(classType: SearchSheet),
+    StackedBottomsheet(classType: AuthSheet),
     // @stacked-bottom-sheet
   ],
   dialogs: [

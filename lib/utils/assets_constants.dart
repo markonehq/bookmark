@@ -4,6 +4,7 @@ class AssetsConstants {
 
   // Images
   static const String logo = '$_baseImageUrl/logo.png';
+  static const String logoClrBg = '$_baseImageUrl/logo_clrbg.png';
 
   // Icons
   static const String gear = '$_baseIconUrl/settings/gear.svg';
