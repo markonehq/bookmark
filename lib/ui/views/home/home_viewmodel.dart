@@ -1,20 +1,25 @@
 part of 'home_view.dart';
 
 class Bookmark {
-  String link;
-  String title;
-  String description;
-  String? imageUrl;
-  String createdAt;
-  String? ogImage;
+  final String link;
+  final String createdAt;
 
   Bookmark({
     required this.link,
+    String? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now().toIso8601String();
+}
+
+class BookmarkMetadata {
+  final String title;
+  final String description;
+  final String? imageUrl;
+
+  BookmarkMetadata({
     required this.title,
     required this.description,
     this.imageUrl,
-    String? createdAt,
-  }) : createdAt = createdAt ?? DateTime.now().toIso8601String();
+  });
 }
 
 class HomeViewModel extends BaseViewModel {
@@ -27,53 +32,20 @@ class HomeViewModel extends BaseViewModel {
   String avatar = "";
   String uid = "";
   final NavigationService navigationService = locator<NavigationService>();
-  static final Map<String, Bookmark> ogDataCache = {};
+  static final Map<String, BookmarkMetadata> ogDataCache = {};
 
   final List<Bookmark> _bookmarks = [
     Bookmark(
-      link:
-          "https://timesofindia.indiatimes.com/travel/destinations/places-to-visit-in-jammu-the-key-attractions-of-this-heavenly-land/articleshow/59557249.cms",
-      title: "Google",
-      description:
-          "Search the world's information, including webpages, images, videos and more.",
-      imageUrl:
-          "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-    ),
+        link:
+            "https://timesofindsia.indiatimes.com/travel/destinations/places-to-visit-in-jammu-the-key-attractions-of-this-heavenly-land/articleshow/59557249.cms"),
+    Bookmark(link: "https://www.github.com"),
+    Bookmark(link: "https://www.stackoverflow.com"),
+    Bookmark(link: "https://www.reddit.com"),
     Bookmark(
-      link: "https://www.github.com",
-      title: "GitHub",
-      description: "Where the world builds software.",
-      imageUrl:
-          "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-    ),
-    Bookmark(
-      link: "https://www.stackoverflow.com",
-      title: "Stack Overflow",
-      description:
-          "A question and answer site for professional and enthusiast programmers.",
-    ),
-    Bookmark(
-      link: "https://www.reddit.com",
-      title: "Reddit",
-      description: "The front page of the internet.",
-      imageUrl:
-          "https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png",
-    ),
-    Bookmark(
-      link:
-          "https://medium.com/@vpznc/free-mobbin-and-appshots-alternatives-for-ui-references-990d10f9e01f",
-      title: "Medium not og",
-      description:
-          "A place where words matter. Read, write, and share stories that matter.",
-      imageUrl:
-          "https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png",
-    ),
-    Bookmark(
-      link: "https://www.youtube.com/watch?v=r6lFBUytgDM",
-      title: "Youtube",
-      description:
-          "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
-    )
+        link:
+            "https://medium.com/@vpznc/free-mobbin-and-appshots-alternatives-for-ui-references-990d10f9e01f"),
+    Bookmark(link: "https://www.youtube.com/watch?v=r6lFBUytgDM"),
+    Bookmark(link: "https://pin.it/1qJYRRc01"),
   ];
   List<Bookmark> get getBookmarks => _bookmarks;
 
@@ -160,10 +132,6 @@ class HomeViewModel extends BaseViewModel {
 
     return _bookmarks
         .where((bookmark) =>
-            (bookmark.title.toLowerCase())
-                .contains(searchQuery.toLowerCase()) ||
-            (bookmark.description.toLowerCase())
-                .contains(searchQuery.toLowerCase()) ||
             (bookmark.link.toLowerCase()).contains(searchQuery.toLowerCase()))
         .toList();
   }
@@ -182,33 +150,56 @@ class HomeViewModel extends BaseViewModel {
     try {
       if (ogDataCache.containsKey(bookmark.link)) return;
 
+      setBusyForObject(bookmark.link, true);
+
       final metadata = await MetadataFetch.extract(bookmark.link);
 
       if (metadata != null) {
-        ogDataCache[bookmark.link] = Bookmark(
-          title: metadata.title ?? bookmark.title,
-          description: metadata.description ?? bookmark.description,
-          imageUrl: metadata.image ?? bookmark.imageUrl,
-          link: bookmark.link,
+        ogDataCache[bookmark.link] = BookmarkMetadata(
+          title: metadata.title ?? getFallbackTitle(bookmark.link),
+          description: metadata.description ?? '',
+          imageUrl: metadata.image,
         );
+
+        log.d("Fetched OG data for ${bookmark.link}: ${metadata.title}");
       }
     } catch (e) {
       log.e("Error fetching OG data for ${bookmark.link}: $e");
     } finally {
+      setBusyForObject(bookmark.link, false);
       notifyListeners();
     }
   }
 
-  Bookmark getOgData(Bookmark bookmark) {
-    if (!ogDataCache.containsKey(bookmark.link)) {
-      log.d("No cached OG data for ${bookmark.link}, using bookmark data");
-      ogDataCache[bookmark.link] = Bookmark(
-        title: "${bookmark.title} (not fetched)",
-        description: bookmark.description,
-        imageUrl: bookmark.imageUrl,
-        link: bookmark.link,
+  // Helper method to get a title from the URL if OG data doesn't provide one
+  String getFallbackTitle(String url) {
+    try {
+      final uri = Uri.parse(url);
+      return uri.host.replaceAll('www.', '');
+    } catch (e) {
+      return url;
+    }
+  }
+
+  // Bookmark getOgData(Bookmark bookmark) {
+  //   if (!ogDataCache.containsKey(bookmark.link)) {
+  //     log.d("No cached OG data for ${bookmark.link}, using bookmark data");
+  //     ogDataCache[bookmark.link] = Bookmark(
+  //       link: bookmark.link,
+  //     );
+  //   }
+  //   return ogDataCache[bookmark.link]!;
+  // }
+
+  BookmarkMetadata getMetadata(String bookmarkLink) {
+    if (!ogDataCache.containsKey(bookmarkLink)) {
+      log.d("No cached OG data for $bookmarkLink, initializing with defaults");
+      ogDataCache[bookmarkLink] = BookmarkMetadata(
+        title: getFallbackTitle(bookmarkLink),
+        description: '',
+        imageUrl: null,
       );
     }
-    return ogDataCache[bookmark.link]!;
+    return ogDataCache[bookmarkLink]!;
   }
 }

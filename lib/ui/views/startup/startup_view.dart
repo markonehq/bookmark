@@ -2,8 +2,10 @@ import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/ui/common_widgets/loading_circular.dart';
+import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 part 'startup_viewmodel.dart';
 
@@ -12,7 +14,7 @@ class StartupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<StartupViewModel>.nonReactive(
+    return ViewModelBuilder<StartupViewModel>.reactive(
       viewModelBuilder: () => StartupViewModel(),
       onViewModelReady: (model) => model.runStartupLogic(),
       builder: (context, model, child) => Scaffold(

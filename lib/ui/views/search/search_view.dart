@@ -1,4 +1,3 @@
-import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/ui/views/search/search_viewcomponents.dart';
 import 'package:bookmark/utils/file_exporter.dart';
@@ -13,7 +12,6 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final font = FontTheme();
     return ViewModelBuilder<SearchViewmodel>.reactive(
       viewModelBuilder: () => SearchViewmodel(),
       onViewModelReady: (model) => model.init(),
@@ -111,19 +109,14 @@ class SearchView extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         final link =
                                             model.bookmarks[index].link;
-                                        final bookmark =
-                                            HomeViewModel.ogDataCache[link] ??
-                                                model.bookmarks[index];
-
-                                        return buildBookmarkCard(
-                                                data: bookmark,
-                                                font: font,
-                                                context: context)
+                                        return buildBookmarkCard(link, context)
                                             .animate()
                                             .fadeIn(
                                                 duration: 400.ms,
                                                 delay: (index * 100).ms)
-                                            .slide(begin: const Offset(0, 0.1));
+                                            .slide(
+                                              begin: const Offset(0, 0.1),
+                                            );
                                       },
                                       childCount: model.bookmarks.length,
                                       mainAxisSpacing: 4.h,
