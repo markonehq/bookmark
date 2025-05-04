@@ -48,19 +48,33 @@
     <key>FirebaseAppDelegateProxyEnabled</key>
     <true/>
     <key>GIDClientID</key>
-   <string>559317773806-q9blfl7iprcufatddpo0ukhmifl2lvsb.apps.googleusercontent.com</string>
-
+    <string>559317773806-q9blfl7iprcufatddpo0ukhmifl2lvsb.apps.googleusercontent.com</string>
    <key>CFBundleURLTypes</key>
    <array>
-   	<dict>
-   		<key>CFBundleTypeRole</key>
-   		<string>Editor</string>
-   		<key>CFBundleURLSchemes</key>
-   		<array>
-   			<string>com.googleusercontent.apps.559317773806-q9blfl7iprcufatddpo0ukhmifl2lvsb</string>
-   		</array>
-   	</dict>
+      <!-- First URL Scheme for Google OAuth -->
+      <dict>
+         <key>CFBundleTypeRole</key>
+         <string>Editor</string>
+         <key>CFBundleURLSchemes</key>
+         <array>
+            <string>com.googleusercontent.apps.559317773806-q9blfl7iprcufatddpo0ukhmifl2lvsb</string>
+         </array>
+      </dict>
+
+      <!-- Second URL Scheme for ShareMedia -->
+      <dict>
+         <key>CFBundleTypeRole</key>
+         <string>Editor</string>
+         <key>CFBundleURLSchemes</key>
+         <array>
+            <string>ShareMedia-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+         </array>
+      </dict>
    </array>
+   <key>AppGroupId</key>
+   <string>$(CUSTOM_GROUP_ID)</string>
+   <key>NSPhotoLibraryUsageDescription</key>
+   <string>To add photos, please allow permission to access your photo library.</string>
 
 </dict>
 </plist>
