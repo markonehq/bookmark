@@ -37,7 +37,7 @@ class HomeViewModel extends BaseViewModel {
   final List<Bookmark> _bookmarks = [
     Bookmark(
         link:
-            "https://timesofindsia.indiatimes.com/travel/destinations/places-to-visit-in-jammu-the-key-attractions-of-this-heavenly-land/articleshow/59557249.cms"),
+            "https://timesofindia.indiatimes.com/travel/destinations/places-to-visit-in-jammu-the-key-attractions-of-this-heavenly-land/articleshow/59557249.cms"),
     Bookmark(link: "https://www.github.com"),
     Bookmark(link: "https://www.stackoverflow.com"),
     Bookmark(link: "https://www.reddit.com"),
