@@ -1,5 +1,3 @@
-import 'package:bookmark/services/auth_service.dart' show AuthService;
-import 'package:bookmark/ui/common_widgets/loading_circular.dart';
 import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 
@@ -77,19 +75,3 @@ class AuthView extends StatelessWidget {
     );
   }
 }
-// ElevatedButton(
-//                 onPressed: () {
-//                   model.login();
-//                 },
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     SvgPicture.asset(
-//                       AssetsConstants.google,
-//                       height: 24.h,
-//                       width: 24.w,
-//                     ),
-//                     8.horizontalSpace,
-//                     const Text("Google Sign In"),
-//                   ],
-//                 )),

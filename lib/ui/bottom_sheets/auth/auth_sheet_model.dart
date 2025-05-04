@@ -1,39 +1,28 @@
-
 part of 'auth_sheet.dart';
 
 class AuthSheetModel extends BaseViewModel {
   final log = getLogger("AuthSheetModel");
-  final _pref = locator<LocalStorageService>();
-  final NavigationService navigation = locator<NavigationService>();
-  String username = 'hwl';
-  String email = '';
-  String avatar = '';
-
-  // bool isDarkMode = false;
-
-  // void toggleMode() {
-  //   isDarkMode = !isDarkMode;
-  //   notifyListeners();
-  // }
-
+  final NavigationService navigationService = locator<NavigationService>();
+  final AuthService authService = locator<AuthService>();
   void init() {
-    // Initialize any data or state here
-    username = _pref.read('name') ?? '';
-    email = _pref.read('email') ?? '';
-    avatar = _pref.read('avatar') ?? '';
-
-    log.d("AuthSheetModel initialized");
-    log.d("Username: $username");
-    log.d("Email: $email");
-    log.d("Avatar: $avatar");
-    notifyListeners();
+    log.d("AuthViewModel initialized");
   }
 
-  void logout() async {
+  Future<void> login() async {
     setBusy(true);
-    await GoogleSignIn().signOut();
-    await AuthService().signOut();
-    navigation.clearStackAndShow(Routes.authView);
-    setBusy(false);
+    try {
+      loadingCircular();
+      final bool status = await authService.signInWithGoogle();
+      if (status) {
+        log.d("Login successful");
+        navigationService.navigateTo(Routes.onboardingView);
+      } else {
+        log.d("Login failed");
+      }
+    } catch (e) {
+      log.e("Login failed: $e");
+    } finally {
+      setBusy(false);
+    }
   }
 }
