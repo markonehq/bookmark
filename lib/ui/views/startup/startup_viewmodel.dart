@@ -8,24 +8,23 @@ class StartupViewModel extends BaseViewModel {
   final font = FontTheme();
 
   Future runStartupLogic() async {
-    log.d(_auth.currentUser);
+    log.d("Running startup logic...");
     try {
-      if (_auth.currentUser != null &&
-          _auth.currentUser!.uid.isNotEmpty &&
-          _auth.currentUser!.isAnonymous == false &&
-          _pref.read("uid") != null) {
-        log.d("User is logged in");
-        WidgetsBinding.instance.addPostFrameCallback((_) async {
-          await _navigationService.clearStackAndShow(Routes.homeView);
-        });
+      await Future.delayed(2000.ms);
+
+      if (_auth.currentUser != null && _pref.read("uid") != null) {
+        _navigationService.replaceWithTransition(
+          const HomeView(),
+          transitionStyle: Transition.downToUp,
+          duration: 600.ms,
+          curve: Curves.easeInOut,
+        );
       } else {
-        log.d("User is not logged in");
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _navigationService.replaceWith(Routes.authView);
-        });
+        _navigationService.clearStackAndShow(Routes.authView);
       }
     } on Exception catch (e) {
-      log.e("Error in runStartupLogic: $e");
+      log.e("Error in startup logic: $e");
+      _navigationService.clearStackAndShow(Routes.authView);
     }
   }
 }

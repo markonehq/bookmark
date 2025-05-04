@@ -2,7 +2,6 @@ import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/utils/file_exporter.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 part 'settings_sheet_model.dart';

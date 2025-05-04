@@ -40,17 +40,24 @@ class SearchViewmodel extends BaseViewModel {
 
   List<Bookmark> get bookmarks {
     final HomeViewModel homeViewModel = locator<HomeViewModel>();
+
     if (searchQuery.isEmpty) {
       return homeViewModel.getBookmarks;
     }
 
-    return homeViewModel.getBookmarks
-        .where((bookmark) =>
-            (bookmark.title.toLowerCase())
-                .contains(searchQuery.toLowerCase()) ||
-            (bookmark.description.toLowerCase())
-                .contains(searchQuery.toLowerCase()) ||
-            (bookmark.link.toLowerCase()).contains(searchQuery.toLowerCase()))
-        .toList();
+    return homeViewModel.getBookmarks.where((bookmark) {
+      // Get metadata for this bookmark from HomeViewModel's cache
+      final metadata = homeViewModel.getMetadata(bookmark.link);
+
+      // Make sure to handle null values safely
+      final title = metadata.title.toLowerCase();
+      final description = metadata.description.toLowerCase();
+      final query = searchQuery.toLowerCase();
+
+      // Now search in all the relevant fields
+      return title.contains(query) ||
+          description.contains(query) ||
+          bookmark.link.toLowerCase().contains(query);
+    }).toList();
   }
 }
