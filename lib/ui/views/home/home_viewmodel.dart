@@ -26,6 +26,8 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewModel");
   final BottomSheetService bottomSheetService = locator<BottomSheetService>();
   final _pref = locator<LocalStorageService>();
+  final _sharingIntentService = locator<SharingIntentService>();
+  List _sharedFiles = [];
 
   String name = "";
   String email = "";
@@ -75,6 +77,7 @@ class HomeViewModel extends BaseViewModel {
   void init() async {
     setBusy(true);
     log.d("HomeViewModel initialized");
+    handleSharingIntent();
     name = _pref.read('name') ?? '';
     email = _pref.read('email') ?? '';
     avatar = _pref.read('avatar') ?? '';
@@ -201,5 +204,15 @@ class HomeViewModel extends BaseViewModel {
       );
     }
     return ogDataCache[bookmarkLink]!;
+  }
+
+  // Sharing Intent Methods
+  Future<void> handleSharingIntent() async {
+    log.i("Handling sharing intent");
+    _sharingIntentService.sharedMediaStream.listen((files) {
+      _sharedFiles = files;
+      notifyListeners();
+      log.d("Shared files: $_sharedFiles");
+    });
   }
 }

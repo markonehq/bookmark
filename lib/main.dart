@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bookmark/firebase_options.dart';
 import 'package:bookmark/services/local_storage_service.dart';
+import 'package:bookmark/services/sharing_intent_service.dart';
 import 'package:bookmark/utils/file_exporter.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -25,6 +26,7 @@ Future<void> main() async {
   };
   await setupLocator();
   await locator<LocalStorageService>().initStorage();
+  await locator<SharingIntentService>().init();
 
   setupDialogUi();
   setupBottomSheetUi();
