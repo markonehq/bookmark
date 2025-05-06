@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:bookmark/utils/file_exporter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
+@lazySingleton
 class SharingIntentService {
   final log = getLogger('SharingIntentService');
   final List<SharedMediaFile> _sharedFiles = [];
