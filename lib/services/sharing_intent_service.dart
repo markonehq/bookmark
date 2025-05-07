@@ -5,6 +5,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 class SharingIntentService {
   final log = getLogger('SharingIntentService');
   final List<SharedMediaFile> _sharedFiles = [];
+  List<SharedMediaFile> get sharedFiles => _sharedFiles;
   final StreamController<List<SharedMediaFile>> _mediaStreamController =
       StreamController.broadcast();
 
