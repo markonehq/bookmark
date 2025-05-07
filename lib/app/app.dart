@@ -1,5 +1,6 @@
 import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/firestore_service.dart';
+import 'package:bookmark/services/sharing_intent_service.dart';
 import 'package:bookmark/ui/bottom_sheets/auth/auth_sheet.dart';
 import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/views/auth/auth_view.dart';
@@ -32,6 +33,7 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: LocalStorageService),
+    LazySingleton(classType: SharingIntentService),
     LazySingleton(classType: HomeViewModel),
 
     // @stacked-service

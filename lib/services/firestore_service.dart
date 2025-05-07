@@ -6,9 +6,12 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class FirestoreService {
   final log = getLogger("FirestoreService");
-
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  //_________________________________________________
+  //
+  // User Methods
+  //_________________________________________________
   Future<void> saveUserData(UserModel data) async {
     try {
       await _firestore.collection('users').doc(data.uid).set(data.toJson());
@@ -17,4 +20,10 @@ class FirestoreService {
       log.e("Error saving user data: $e");
     }
   }
+
+
+  //_________________________________________________
+  //
+  // Bookmark Methods
+  //_________________________________________________
 }
