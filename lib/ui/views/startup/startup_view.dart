@@ -2,6 +2,7 @@ import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/ui/common_widgets/loading_circular.dart';
+import 'package:bookmark/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/utils/assets_constants.dart';
 import 'package:bookmark/utils/file_exporter.dart';

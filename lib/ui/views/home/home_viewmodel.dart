@@ -91,25 +91,25 @@ class HomeViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void handleFileAction() {
-    log.i("File action triggered");
-    // Add your logic for handling files
-  }
+  // void handleFileAction() {
+  //   log.i("File action triggered");
+  //   // Add your logic for handling files
+  // }
 
-  void handleLinkAction() {
-    log.i("Link action triggered");
-    // Add your logic for handling links
-  }
+  // void handleLinkAction() {
+  //   log.i("Link action triggered");
+  //   // Add your logic for handling links
+  // }
 
-  void handleNoteAction() {
-    log.i("Note action triggered");
-    // Add your logic for handling notes
-  }
+  // void handleNoteAction() {
+  //   log.i("Note action triggered");
+  //   // Add your logic for handling notes
+  // }
 
-  void handlePdfAction() {
-    log.i("PDF action triggered");
-    // Add your logic for handling PDFs
-  }
+  // void handlePdfAction() {
+  //   log.i("PDF action triggered");
+  //   // Add your logic for handling PDFs
+  // }
 
   Future showSettingBottomSheet() async {
     await bottomSheetService.showCustomSheet(
