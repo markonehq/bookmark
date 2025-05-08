@@ -1,19 +1,19 @@
 import 'package:bookmark/services/auth_service.dart';
 import 'package:bookmark/services/firestore_service.dart';
-import 'package:bookmark/services/sharing_intent_service.dart';
-import 'package:bookmark/ui/bottom_sheets/auth/auth_sheet.dart';
-import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
-import 'package:bookmark/ui/views/auth/auth_view.dart';
-import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
-import 'package:bookmark/ui/views/search/search_view.dart';
-import 'package:stacked/stacked_annotations.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:bookmark/services/local_storage_service.dart';
 import 'package:bookmark/services/theme_service.dart';
+import 'package:bookmark/ui/bottom_sheets/auth/auth_sheet.dart';
+import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/bottom_sheets/settings/settings_sheet.dart';
 import 'package:bookmark/ui/dialogs/info_alert/info_alert_dialog.dart';
+import 'package:bookmark/ui/views/auth/auth_view.dart';
+import 'package:bookmark/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:bookmark/ui/views/home/home_view.dart';
+import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
+import 'package:bookmark/ui/views/search/search_view.dart';
 import 'package:bookmark/ui/views/startup/startup_view.dart';
+import 'package:stacked/stacked_annotations.dart';
+import 'package:stacked_services/stacked_services.dart';
 // @stacked-import
 
 @StackedApp(
@@ -33,8 +33,8 @@ import 'package:bookmark/ui/views/startup/startup_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: LocalStorageService),
-    LazySingleton(classType: SharingIntentService),
     LazySingleton(classType: HomeViewModel),
+    LazySingleton(classType: BottomNavViewModel),
 
     // @stacked-service
   ],

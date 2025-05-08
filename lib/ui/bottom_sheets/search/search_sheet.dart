@@ -1,6 +1,6 @@
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/utils/file_exporter.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 part 'search_sheet_model.dart';
 

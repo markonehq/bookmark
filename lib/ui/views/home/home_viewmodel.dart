@@ -26,7 +26,8 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger("HomeViewModel");
   final BottomSheetService bottomSheetService = locator<BottomSheetService>();
   final _pref = locator<LocalStorageService>();
-  final _sharingIntentService = locator<SharingIntentService>();
+  late StreamSubscription _intentSub;
+  final _sharedFiles = <SharedMediaFile>[];
 
   String name = "";
   String email = "";
@@ -61,6 +62,26 @@ class HomeViewModel extends BaseViewModel {
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
 
+  void init() async {
+    setBusy(true);
+    log.d("HomeViewModel initialized");
+    name = _pref.read('name') ?? '';
+    email = _pref.read('email') ?? '';
+    avatar = _pref.read('avatar') ?? '';
+    uid = _pref.read('uid') ?? '';
+    handleSharingIntent();
+    for (var bookmark in _bookmarks) {
+      await fetchOgData(bookmark);
+    }
+    setBusy(false);
+  }
+
+  @override
+  void dispose() {
+    _intentSub.cancel();
+    super.dispose();
+  }
+
   void updateSearchQuery(String query) {
     _searchQuery = query;
     notifyListeners();
@@ -71,24 +92,6 @@ class HomeViewModel extends BaseViewModel {
     _searchController.clear();
     _isSearching = false;
     notifyListeners();
-  }
-
-  void init() async {
-    setBusy(true);
-    log.d("HomeViewModel initialized");
-    // await handleSharingIntent();
-     for (var file in _sharingIntentService.sharedFiles) {
-      log.i("📄 File path: ${file.path}");
-      log.i("📦 File type: ${file.type}");
-    }
-    name = _pref.read('name') ?? '';
-    email = _pref.read('email') ?? '';
-    avatar = _pref.read('avatar') ?? '';
-    uid = _pref.read('uid') ?? '';
-    for (var bookmark in _bookmarks) {
-      await fetchOgData(bookmark);
-    }
-    setBusy(false);
   }
 
   // void handleFileAction() {
@@ -187,16 +190,6 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  // Bookmark getOgData(Bookmark bookmark) {
-  //   if (!ogDataCache.containsKey(bookmark.link)) {
-  //     log.d("No cached OG data for ${bookmark.link}, using bookmark data");
-  //     ogDataCache[bookmark.link] = Bookmark(
-  //       link: bookmark.link,
-  //     );
-  //   }
-  //   return ogDataCache[bookmark.link]!;
-  // }
-
   BookmarkMetadata getMetadata(String bookmarkLink) {
     if (!ogDataCache.containsKey(bookmarkLink)) {
       log.d("No cached OG data for $bookmarkLink, initializing with defaults");
@@ -209,13 +202,51 @@ class HomeViewModel extends BaseViewModel {
     return ogDataCache[bookmarkLink]!;
   }
 
-  // Sharing Intent Methods
-  // Future<void> handleSharingIntent() async {
-  //   log.i("Handling sharing intent");
-  //   _sharingIntentService.sharedMediaStream.listen((files) {
-  //     _sharedFiles = files;
-  //     notifyListeners();
-  //           log.d("Shared files: $_sharedFiles");
-  //   });
-  // }
+  void addBookmark(Bookmark bookmark) {
+    log.d("Adding bookmark: ${bookmark.link}");
+    _bookmarks.add(bookmark);
+    notifyListeners();
+  }
+
+  void handleSharingIntent() {
+    log.i("Handling sharing intent");
+
+    // Listen to media sharing coming from outside the app while the app is in the memory.
+    _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen((value) {
+      _sharedFiles.clear();
+      _sharedFiles.addAll(value);
+      // Add the shared files to the bookmarks and fetch OG data for each
+      for (var file in _sharedFiles) {
+        if (file.type == SharedMediaType.url) {
+          var bookmark = Bookmark(link: file.path);
+          addBookmark(bookmark);
+          fetchOgData(bookmark);
+          rebuildUi();
+        }
+      }
+      notifyListeners();
+      log.d(_sharedFiles.map((f) => f.toMap()));
+    }, onError: (err) {
+      log.e("getIntentDataStream error: $err");
+    });
+
+    // Get the media sharing coming from outside the app while the app is closed.
+    ReceiveSharingIntent.instance.getInitialMedia().then((value) {
+      _sharedFiles.clear();
+      _sharedFiles.addAll(value);
+      // Add the shared files to the bookmarks and fetch OG data for each
+      for (var file in _sharedFiles) {
+        if (file.type == SharedMediaType.url) {
+          var bookmark = Bookmark(link: file.path);
+          addBookmark(bookmark);
+          fetchOgData(bookmark);
+        }
+      }
+      notifyListeners();
+      log.d(_sharedFiles.map((f) => f.toMap()));
+
+      // Tell the library that we are done processing the intent.
+      ReceiveSharingIntent.instance.reset();
+    });
+  }
 }

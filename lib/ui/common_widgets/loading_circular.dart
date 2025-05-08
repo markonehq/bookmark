@@ -1,16 +1,16 @@
 import 'package:bookmark/utils/file_exporter.dart';
 
 Widget loadingCircular() {
-  return const Center(
+  return Center(
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Loading ...', style: TextStyle(fontSize: 16)),
+        const Text('Loading ...', style: TextStyle(fontSize: 16)),
         SizedBox(
-          width: 16,
-          height: 16,
-          child: CircularProgressIndicator(
-            color: Colors.black,
+          width: 16.w,
+          height: 16.h,
+          child: const CircularProgressIndicator(
+            color: Color(0xFF242424),
             strokeWidth: 6,
           ),
         )

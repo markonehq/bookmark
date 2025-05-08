@@ -60,3 +60,8 @@ app.*.map.json
 stacked.json
 stacked.json.*
 .vscode/
+
+# cursor
+.cursorrules
+.cursor
+.cursorignore
