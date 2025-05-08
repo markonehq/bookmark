@@ -7,12 +7,11 @@ class BottomNavViewModel extends IndexTrackingViewModel {
   @override
   int currentIndex = 0;
 
-  void init() {
-  }
+  void init() {}
 
   @override
   void setIndex(int value) {
-    pageController.jumpToPage(value); 
+    pageController.jumpToPage(value);
     currentIndex = value;
     notifyListeners();
   }
@@ -24,8 +23,7 @@ class BottomNavViewModel extends IndexTrackingViewModel {
 
   List<Widget> get pages => const [
         HomeView(),
-        HomeView(),
-        HomeView(),
+        Center(child: Text('Spaces')),
+        Center(child: Text('Create')),
       ];
 }
-

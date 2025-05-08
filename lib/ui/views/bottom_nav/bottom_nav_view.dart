@@ -16,7 +16,7 @@ class BottomNavView extends StatelessWidget {
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               body: PageView(
                 controller: model.pageController,
                 onPageChanged: model.setIndex,
