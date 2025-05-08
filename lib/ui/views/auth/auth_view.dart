@@ -46,7 +46,7 @@ class AuthView extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 20.h,
+              bottom: 60.h,
               left: 16.w,
               right: 16.w,
               child: ElevatedButton(
