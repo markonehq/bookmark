@@ -7,6 +7,7 @@ import 'package:bookmark/ui/bottom_sheets/search/search_sheet.dart';
 import 'package:bookmark/ui/bottom_sheets/settings/settings_sheet.dart';
 import 'package:bookmark/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:bookmark/ui/views/auth/auth_view.dart';
+import 'package:bookmark/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/ui/views/onboarding/onboarding_view.dart';
 import 'package:bookmark/ui/views/search/search_view.dart';
@@ -32,7 +33,8 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: LocalStorageService),
-    Factory(classType: HomeViewModel),
+    LazySingleton(classType: HomeViewModel),
+    LazySingleton(classType: BottomNavViewModel),
 
     // @stacked-service
   ],
