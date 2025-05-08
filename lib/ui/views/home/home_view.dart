@@ -1,5 +1,6 @@
+import 'dart:async';
+
 import 'package:bookmark/services/local_storage_service.dart';
-import 'package:bookmark/services/sharing_intent_service.dart';
 import 'package:bookmark/ui/common/app_font.dart';
 import 'package:bookmark/ui/common_widgets/loading_circular.dart';
 import 'package:bookmark/ui/common_widgets/loading_shimmer.dart';
@@ -10,9 +11,10 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart'
     show SliverMasonryGrid;
 import 'package:metadata_fetch/metadata_fetch.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-part 'home_viewmodel.dart';
 part 'home_view_components.dart';
+part 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -93,9 +95,7 @@ class HomeView extends StatelessWidget {
             leading: Padding(
               padding: EdgeInsets.only(left: 16.w),
               child: GestureDetector(
-                  onTap: () {
-                    viewModel.showSettingBottomSheet();
-                  },
+                  onTap: viewModel.showSettingBottomSheet,
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(viewModel.avatar),
                     radius: 20.w,
@@ -116,9 +116,7 @@ class HomeView extends StatelessWidget {
                   ? TextField(
                       controller: viewModel._searchController,
                       autofocus: true,
-                      onSubmitted: (String value) {
-                        viewModel.showSearchBottomSheet();
-                      },
+                      onSubmitted: (_) => viewModel.showSearchBottomSheet(),
                       cursorColor: Colors.orangeAccent[200],
                       onChanged: viewModel.updateSearchQuery,
                       decoration: InputDecoration(
@@ -132,9 +130,7 @@ class HomeView extends StatelessWidget {
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.close),
-                          onPressed: () {
-                            viewModel.clearSearch();
-                          },
+                          onPressed: viewModel.clearSearch,
                         ),
                       ))
                   : null,
@@ -144,11 +140,7 @@ class HomeView extends StatelessWidget {
                 IconButton(
                   padding: EdgeInsets.only(right: 16.w),
                   icon: const Icon(Icons.search),
-                  onPressed: () {
-                    viewModel.navigateToSearch();
-                    // viewModel._isSearching = true;
-                    // viewModel.notifyListeners();
-                  },
+                  onPressed: viewModel.navigateToSearch,
                 ),
             ],
           ),
@@ -170,15 +162,14 @@ class HomeView extends StatelessWidget {
             ),
             child: !viewModel.isBusy
                 ? GestureDetector(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
-                    },
+                    onTap: () => FocusScope.of(context).unfocus(),
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 400),
                       child: ScreenWrapper(
                         child: CustomScrollView(
                           keyboardDismissBehavior:
                               ScrollViewKeyboardDismissBehavior.onDrag,
+                          cacheExtent: 1000,
                           slivers: [
                             SliverPadding(
                               padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -186,13 +177,14 @@ class HomeView extends StatelessWidget {
                                 crossAxisCount: 2,
                                 itemBuilder: (context, index) {
                                   final link = viewModel.bookmarks[index].link;
-
-                                  return buildBookmarkCard(link, context)
-                                      .animate()
-                                      .fadeIn(
-                                          duration: 400.ms,
-                                          delay: (index * 100).ms)
-                                      .slide(begin: const Offset(0, 0.1));
+                                  return RepaintBoundary(
+                                    child: buildBookmarkCard(link, context)
+                                        .animate()
+                                        .fadeIn(
+                                            duration: 400.ms,
+                                            delay: (index * 100).ms)
+                                        .slide(begin: const Offset(0, 0.1)),
+                                  );
                                 },
                                 childCount: viewModel.bookmarks.length,
                                 mainAxisSpacing: 4.h,

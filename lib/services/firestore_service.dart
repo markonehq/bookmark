@@ -1,5 +1,5 @@
 import 'package:bookmark/app/app.logger.dart';
-import 'package:bookmark/model/user_model.dart';
+import 'package:bookmark/model/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,7 +20,6 @@ class FirestoreService {
       log.e("Error saving user data: $e");
     }
   }
-
 
   //_________________________________________________
   //
