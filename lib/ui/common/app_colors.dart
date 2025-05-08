@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 extension ColorSchemeExtension on ColorScheme {
   // General Colors
   Color get black => const Color(0xFF252525);
-  Color get white => const Color(0xFFE8E8E8);
+  Color get white => const Color(0xFFF3F3F3);
 
   // Primary Colors
-  Color get primaryBrandColor => const Color(0xFF5FCF80);
+  Color get primaryBrandColor => const Color(0xFFFFDB52);
 
   // Secondary Colors
   // static const Color secondary = Color(0xFFFF5722);

@@ -54,21 +54,21 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
   @override
   Widget build(BuildContext context, BottomNavViewModel viewModel) {
     return Positioned(
-      bottom: 16.h,
+      bottom: 25.h,
       left: 0,
       right: 0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 65.h,
+            height: 55.h,
             width: 160.w,
             padding: EdgeInsets.symmetric(
               vertical: 8.h,
             ),
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(220), // Semi-transparent white
-              borderRadius: BorderRadius.circular(26.r),
+              color: Colors.white, // Semi-transparent white
+              borderRadius: BorderRadius.circular(22.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(30),
@@ -83,14 +83,14 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
               children: [
                 _buildNavItem(
                   context: context,
-                  icon: Icons.grid_view_rounded,
+                  icon: 'assets/icons/navbar/pins.svg',
                   text: 'Home',
                   index: 0,
                   viewModel: viewModel,
                 ),
                 _buildNavItem(
                   context: context,
-                  icon: Icons.group,
+                  icon: 'assets/icons/navbar/spaces.svg',
                   text: 'Spaces',
                   index: 1,
                   viewModel: viewModel,
@@ -100,11 +100,11 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
           ),
           8.horizontalSpace,
           Container(
-            height: 65.h,
-            width: 60.w,
+            height: 55.h,
+            width: 55.w,
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(220),
-              borderRadius: BorderRadius.circular(26.r),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(30),
@@ -117,9 +117,10 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
             child: Center(
               child: _buildNavItem(
                 context: context,
-                icon: Icons.add_circle,
-                text: 'Create',
+                icon: 'assets/icons/navbar/add.svg',
+                text: '',
                 index: 2,
+                color: context.colorScheme.black,
                 viewModel: viewModel,
               ),
             ),
@@ -131,28 +132,37 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
 
   Widget _buildNavItem({
     required BuildContext context,
-    required IconData icon,
-    required String text,
+    required String icon,
+    String? text,
     required int index,
+    Color? color,
     required BottomNavViewModel viewModel,
   }) {
     bool isSelected = viewModel.currentIndex == index;
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => viewModel.setIndex(index),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
+          SvgPicture.asset(
             icon,
-            color: isSelected ? Colors.black : Colors.grey,
+            colorFilter: ColorFilter.mode(
+                color ??
+                    (!isSelected
+                        ? context.colorScheme.black
+                        : context.colorScheme.primaryBrandColor),
+                BlendMode.srcIn),
           ),
-          Text(
-            text,
-            style: context.textTheme.labelSmall?.copyWith(
-              color: isSelected ? Colors.black : Colors.grey,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          isSelected && text != null && color == null && text != ''
+              ? Text(
+                  text,
+                  style: context.textTheme.labelSmall?.copyWith(
+                    color: context.colorScheme.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );
