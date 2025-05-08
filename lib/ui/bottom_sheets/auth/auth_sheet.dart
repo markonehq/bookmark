@@ -139,6 +139,7 @@ class AuthSheet extends StackedView<AuthSheetModel> {
               16.verticalSpace,
               Text(
                 'By clicking ‘Sign In with Google’, you acknowledge that you have read and understood, and agree to Bookmark’s Terms & Conditions and Privacy Policy.',
+                textAlign: TextAlign.justify,
                 style: context.textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: context.colorScheme.black.withAlpha(100),
