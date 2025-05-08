@@ -52,6 +52,7 @@ flutter:
     - assets/icons/
     - assets/icons/settings/
     - assets/icons/auth/
+    - assets/icons/navbar/
 
   fonts:
     - family: Gilroy

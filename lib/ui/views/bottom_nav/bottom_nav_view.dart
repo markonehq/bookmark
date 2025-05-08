@@ -1,7 +1,9 @@
 import 'package:bookmark/ui/views/home/home_view.dart';
 import 'package:bookmark/utils/file_exporter.dart';
-part 'bottom_nav_view_model.dart';
+import 'package:flutter_svg/svg.dart';
+
 part 'bottom_nav_view_components.dart';
+part 'bottom_nav_view_model.dart';
 
 class BottomNavView extends StatelessWidget {
   const BottomNavView({super.key});
@@ -16,8 +18,10 @@ class BottomNavView extends StatelessWidget {
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: Colors.white,
+              extendBody: true,
+              backgroundColor: context.colorScheme.scaffoldColor,
               body: PageView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: model.pageController,
                 onPageChanged: model.setIndex,
                 children: model.pages,
