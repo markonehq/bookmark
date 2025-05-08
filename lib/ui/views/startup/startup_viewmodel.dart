@@ -14,7 +14,7 @@ class StartupViewModel extends BaseViewModel {
 
       if (_auth.currentUser != null && _pref.read("uid") != null) {
         _navigationService.replaceWithTransition(
-          const HomeView(),
+          const BottomNavView(),
           transitionStyle: Transition.downToUp,
           duration: 600.ms,
           curve: Curves.easeInOut,
