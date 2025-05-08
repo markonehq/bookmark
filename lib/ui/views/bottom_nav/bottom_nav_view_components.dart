@@ -16,7 +16,7 @@ class BottomNavActiveIcon extends ViewModelWidget<BottomNavViewModel> {
       height: kBottomNavigationBarHeight,
       margin: EdgeInsets.symmetric(horizontal: 0.sp),
       decoration: BoxDecoration(
-        color: context.colorScheme.primary.withOpacity(0.1),
+        color: context.colorScheme.primary.withAlpha(20),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -60,15 +60,18 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Nav Section
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
+            height: 65.h,
+            width: 160.w,
+            padding: EdgeInsets.symmetric(
+              vertical: 8.h,
+            ),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9), // Semi-transparent white
-              borderRadius: BorderRadius.circular(24.r),
+              color: Colors.white.withAlpha(220), // Semi-transparent white
+              borderRadius: BorderRadius.circular(26.r),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
+                  color: Colors.black.withAlpha(30),
                   blurRadius: 12,
                   spreadRadius: 1,
                   offset: const Offset(0, 4),
@@ -76,17 +79,18 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
               ],
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildNavItem(
                   context: context,
-                  icon: Icons.home,
+                  icon: Icons.grid_view_rounded,
                   text: 'Home',
                   index: 0,
                   viewModel: viewModel,
                 ),
                 _buildNavItem(
                   context: context,
-                  icon: Icons.space_bar,
+                  icon: Icons.group,
                   text: 'Spaces',
                   index: 1,
                   viewModel: viewModel,
@@ -94,30 +98,30 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
               ],
             ),
           ),
-
-          SizedBox(width: 12.w),
-
-          // Add Button (Create)
+          8.horizontalSpace,
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+            height: 65.h,
+            width: 60.w,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9), // Semi-transparent white
-              borderRadius: BorderRadius.circular(24.r),
+              color: Colors.white.withAlpha(220),
+              borderRadius: BorderRadius.circular(26.r),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
+                  color: Colors.black.withAlpha(30),
                   blurRadius: 12,
                   spreadRadius: 1,
                   offset: const Offset(0, 4),
                 ),
               ],
             ),
-            child: _buildNavItem(
-              context: context,
-              icon: Icons.add,
-              text: 'Create',
-              index: 2,
-              viewModel: viewModel,
+            child: Center(
+              child: _buildNavItem(
+                context: context,
+                icon: Icons.add_circle,
+                text: 'Create',
+                index: 2,
+                viewModel: viewModel,
+              ),
             ),
           ),
         ],
@@ -125,7 +129,6 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
     );
   }
 
-  // Helper widget for creating each navigation item with label
   Widget _buildNavItem({
     required BuildContext context,
     required IconData icon,
@@ -136,29 +139,21 @@ class CustomNav extends ViewModelWidget<BottomNavViewModel> {
     bool isSelected = viewModel.currentIndex == index;
     return GestureDetector(
       onTap: () => viewModel.setIndex(index),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Icon
-            Icon(
-              icon,
-              color: isSelected
-                  ? Colors.black
-                  : Colors.grey, // black when selected
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? Colors.black : Colors.grey,
+          ),
+          Text(
+            text,
+            style: context.textTheme.labelSmall?.copyWith(
+              color: isSelected ? Colors.black : Colors.grey,
+              fontWeight: FontWeight.w500,
             ),
-            // Static Label
-            SizedBox(height: 4.sp),
-            Text(
-              text,
-              style: context.textTheme.bodySmall?.copyWith(
-                color: isSelected ? Colors.black : Colors.grey, //
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

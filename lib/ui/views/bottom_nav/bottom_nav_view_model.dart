@@ -8,12 +8,11 @@ class BottomNavViewModel extends IndexTrackingViewModel {
   int currentIndex = 0;
 
   void init() {
-    // You can add init logic here if needed
   }
 
   @override
   void setIndex(int value) {
-    pageController.jumpToPage(value); // or animateToPage if needed
+    pageController.jumpToPage(value); 
     currentIndex = value;
     notifyListeners();
   }
@@ -25,20 +24,8 @@ class BottomNavViewModel extends IndexTrackingViewModel {
 
   List<Widget> get pages => const [
         HomeView(),
-        HomeView(), // Replace with actual view
-        HomeView(), // Replace with actual view
+        HomeView(),
+        HomeView(),
       ];
 }
 
-  // Widget getViewForCurrentIndex(int index) {
-  //   switch (index) {
-  //     case 0:
-  //       return const HomeView();
-  //     case 1:
-  //       return const HomeView();
-  //     case 2: 
-  //       return const HomeView();
-  //     default:
-  //       return const HomeView();
-  //   }
-  // }

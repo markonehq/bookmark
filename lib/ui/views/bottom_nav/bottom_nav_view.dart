@@ -15,15 +15,6 @@ class BottomNavView extends StatelessWidget {
       builder: (context, model, child) {
         return Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFF7F4E8), Color(0xFFEFF0F6)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-            ),
             Scaffold(
               backgroundColor: Colors.transparent,
               body: PageView(
@@ -32,7 +23,6 @@ class BottomNavView extends StatelessWidget {
                 children: model.pages,
               ),
             ),
-            // Custom Nav Bar Here (as shown above)
             const CustomNav(),
           ],
         );
