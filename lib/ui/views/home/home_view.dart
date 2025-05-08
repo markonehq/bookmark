@@ -40,46 +40,22 @@ class HomeView extends StatelessWidget {
                     backgroundColor: Colors.grey[300],
                   )),
             ),
-            title: AnimatedContainer(
-              padding: EdgeInsets.only(left: 10.w),
-              duration: const Duration(milliseconds: 300),
-              alignment: viewModel._isSearching
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
-              width: viewModel._isSearching
-                  ? MediaQuery.of(context).size.width - 90.w
-                  : 0,
-              curve: Curves.easeInOut,
-              child: viewModel._isSearching
-                  ? TextField(
-                      controller: viewModel._searchController,
-                      autofocus: true,
-                      onSubmitted: (_) => viewModel.showSearchBottomSheet(),
-                      cursorColor: Colors.orangeAccent[200],
-                      onChanged: viewModel.updateSearchQuery,
-                      decoration: InputDecoration(
-                        hintText: "Search...",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.w),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        prefixIcon: const Icon(Icons.search),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: viewModel.clearSearch,
-                        ),
-                      ))
-                  : null,
-            ),
-            actions: [
-              if (!viewModel._isSearching)
-                IconButton(
-                  padding: EdgeInsets.only(right: 16.w),
-                  icon: const Icon(Icons.search),
-                  onPressed: viewModel.navigateToSearch,
+            title: Center(
+              child: Text(
+                'BookMark',
+                style: context.textTheme.titleLarge?.copyWith(
+                  color: context.colorScheme.black,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
                 ),
+              ),
+            ),
+            actionsPadding: EdgeInsets.only(right: 8.w),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: viewModel.navigateToSearch,
+              ),
             ],
           ),
           body: Container(
